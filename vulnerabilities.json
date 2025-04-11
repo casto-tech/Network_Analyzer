@@ -1,0 +1,136 @@
+{
+    "ftp": {
+        "vsftpd 2.3.4": "CVE-2011-2523",
+        "ProFTPD 1.3.6": "CVE-2020-9273",
+        "Pure-FTPd 1.0.49": "CVE-2020-11509",
+        "Microsoft IIS FTP Service 7.5": "CVE-2010-3972"
+    },
+    "http": {
+        "Apache httpd 2.4.7": "CVE-2014-0118",
+        "Apache httpd 2.4.49": "CVE-2021-41773",
+        "Apache httpd 2.4.50": "CVE-2021-42013",
+        "Apache httpd 2.4.51": "CVE-2021-44224",
+        "Apache httpd 2.4.55": "CVE-2023-25690",
+        "Apache httpd 2.4.57": "CVE-2023-31122",
+        "Apache Log4j 2.14.1": "CVE-2021-44228",
+        "Apache Struts 2.5.25": "CVE-2020-17530",
+        "Apache Tomcat 9.0.43": "CVE-2021-24122",
+        "Apache Tomcat 10.1.4": "CVE-2023-44487",
+        "Atlassian Confluence 7.18.1": "CVE-2022-26134",
+        "Drupal 9.2.6": "CVE-2022-25271",
+        "Microsoft IIS 10.0": "CVE-2021-31166",
+        "Microsoft IIS 10.0": "CVE-2022-21907",
+        "Microsoft IIS 10.0": "CVE-2023-21596",
+        "nginx 1.20.0": "CVE-2021-23017",
+        "nginx 1.21.3": "CVE-2021-3618",
+        "nginx 1.23.2": "CVE-2023-44487",
+        "Oracle WebLogic Server 12.2.1.4": "CVE-2020-14882",
+        "WordPress 5.8.1": "CVE-2022-21661",
+        "WordPress 6.0.2": "CVE-2023-2745",
+        "WordPress 6.4.2": "CVE-2024-3129"
+    },
+    "ssh": {
+        "Dropbear SSH 2020.80": "CVE-2020-36254",
+        "libssh 0.8.7": "CVE-2018-10933",
+        "OpenSSH 4.7p1": "CVE-2008-5161",
+        "OpenSSH 7.3": "CVE-2016-10009",
+        "OpenSSH 8.4p1": "CVE-2021-28041",
+        "OpenSSH 8.8p1": "CVE-2021-41617",
+        "OpenSSH 9.3p1": "CVE-2023-38408",
+        "OpenSSH 9.7p1": "CVE-2024-6387",
+        "OpenSSH 9.8p1": "CVE-2024-7589"
+    },
+    "telnet": {
+        "": "CVE-1999-0001"
+    },
+    "dns": {
+        "BIND 9.9.4": "CVE-2014-8500",
+        "BIND 9.16.11": "CVE-2020-8625",
+        "BIND 9.18.0": "CVE-2022-2795",
+        "BIND 9.18.18": "CVE-2023-3341",
+        "Microsoft Windows DNS Server": "CVE-2020-1350",
+        "Microsoft Windows DNS Server": "CVE-2022-26809",
+        "PowerDNS Recursor 4.5.1": "CVE-2022-27227",
+        "Unbound 1.13.1": "CVE-2021-25220",
+        "ISC BIND 9.18.21": "CVE-2023-50387"
+    },
+    "smb": {
+        "Microsoft Windows SMBv1": "CVE-2017-0143",
+        "Microsoft Windows SMBv1": "CVE-2017-0144",
+        "Microsoft Windows SMBv3": "CVE-2020-0796",
+        "Microsoft Windows SMBv3": "CVE-2023-23397",
+        "Samba 4.15.5": "CVE-2022-0336",
+        "Samba 4.17.7": "CVE-2023-0225",
+        "Samba 4.18.6": "CVE-2023-3961"
+    },
+    "exim": {
+        "Exim 4.91": "CVE-2019-10149",
+        "Exim 4.94": "CVE-2020-28018",
+        "Exim 4.94.2": "CVE-2021-27216",
+        "Exim 4.96": "CVE-2022-37436",
+        "Exim 4.97": "CVE-2023-42115"
+    },
+    "rdp": {
+        "Microsoft Windows RDP": "CVE-2019-0708",
+        "Microsoft Windows RDP": "CVE-2022-21893",
+        "Microsoft Windows RDP": "CVE-2023-21768",
+        "Microsoft Windows RDP Gateway": "CVE-2020-0609",
+        "Microsoft Windows RDP Gateway": "CVE-2022-30190"
+    },
+    "mail": {
+        "Microsoft Exchange Server": "CVE-2021-26855",
+        "Microsoft Exchange Server": "CVE-2022-41040",
+        "Microsoft Exchange Server": "CVE-2023-21529",
+        "Postfix 3.5.8": "CVE-2021-26342",
+        "Postfix 3.7.2": "CVE-2022-29274"
+    },
+    "vpn": {
+        "Cisco ASA 9.16.1": "CVE-2022-20866",
+        "Cisco ASA 9.17.1": "CVE-2023-20269",
+        "Fortinet FortiOS 6.0.4": "CVE-2018-13379",
+        "Fortinet FortiOS 7.0.5": "CVE-2022-29055",
+        "Fortinet FortiOS 7.2.2": "CVE-2022-42475",
+        "Pulse Secure Pulse Connect Secure 9.1R11": "CVE-2021-22893",
+        "SonicWall SSL VPN 10.2.0": "CVE-2021-20016",
+        "OpenVPN 2.5.1": "CVE-2021-3547"
+    },
+    "database": {
+        "Microsoft SQL Server 2019": "CVE-2022-29143",
+        "MongoDB 4.4.3": "CVE-2021-20333",
+        "MySQL 8.0.27": "CVE-2022-21278",
+        "Oracle Database 19c": "CVE-2021-2351",
+        "PostgreSQL 13.3": "CVE-2021-32027"
+    },
+    "snmp": {
+        "Net-SNMP 5.8": "CVE-2020-15862",
+        "SNMP Agent Default Community String": "CVE-1999-0517"
+    },
+    "ldap": {
+        "OpenLDAP 2.4.48": "CVE-2020-12243",
+        "Microsoft Active Directory": "CVE-2021-42287"
+    },
+    "ntp": {
+        "NTP 4.2.8p12": "CVE-2018-12327",
+        "NTP 4.2.8p15": "CVE-2020-13817"
+    },
+    "kerberos": {
+        "Microsoft Windows Kerberos": "CVE-2022-33679",
+        "Heimdal Kerberos 7.7.0": "CVE-2022-45142"
+    },
+    "sip": {
+        "Asterisk 18.4.0": "CVE-2021-26712",
+        "Kamailio 5.4.4": "CVE-2020-27507"
+    },
+    "imap": {
+        "Dovecot 2.3.10": "CVE-2020-24386",
+        "Cyrus IMAP 3.2.6": "CVE-2021-32056"
+    },
+    "webdav": {
+        "Apache httpd 2.4.48": "CVE-2021-33193",
+        "Microsoft IIS WebDAV": "CVE-2017-7269"
+    },
+    "rpc": {
+        "Microsoft Windows RPC": "CVE-2022-26809",
+        "SunRPC rpcbind": "CVE-2017-8779"
+    }
+}
