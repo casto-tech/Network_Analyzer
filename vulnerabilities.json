@@ -1,136 +1,136 @@
 {
-    "ftp": {
-        "vsftpd 2.3.4": "CVE-2011-2523",
-        "ProFTPD 1.3.6": "CVE-2020-9273",
-        "Pure-FTPd 1.0.49": "CVE-2020-11509",
-        "Microsoft IIS FTP Service 7.5": "CVE-2010-3972"
-    },
-    "http": {
-        "Apache httpd 2.4.7": "CVE-2014-0118",
-        "Apache httpd 2.4.49": "CVE-2021-41773",
-        "Apache httpd 2.4.50": "CVE-2021-42013",
-        "Apache httpd 2.4.51": "CVE-2021-44224",
-        "Apache httpd 2.4.55": "CVE-2023-25690",
-        "Apache httpd 2.4.57": "CVE-2023-31122",
-        "Apache Log4j 2.14.1": "CVE-2021-44228",
-        "Apache Struts 2.5.25": "CVE-2020-17530",
-        "Apache Tomcat 9.0.43": "CVE-2021-24122",
-        "Apache Tomcat 10.1.4": "CVE-2023-44487",
-        "Atlassian Confluence 7.18.1": "CVE-2022-26134",
-        "Drupal 9.2.6": "CVE-2022-25271",
-        "Microsoft IIS 10.0": "CVE-2021-31166",
-        "Microsoft IIS 10.0": "CVE-2022-21907",
-        "Microsoft IIS 10.0": "CVE-2023-21596",
-        "nginx 1.20.0": "CVE-2021-23017",
-        "nginx 1.21.3": "CVE-2021-3618",
-        "nginx 1.23.2": "CVE-2023-44487",
-        "Oracle WebLogic Server 12.2.1.4": "CVE-2020-14882",
-        "WordPress 5.8.1": "CVE-2022-21661",
-        "WordPress 6.0.2": "CVE-2023-2745",
-        "WordPress 6.4.2": "CVE-2024-3129"
-    },
-    "ssh": {
-        "Dropbear SSH 2020.80": "CVE-2020-36254",
-        "libssh 0.8.7": "CVE-2018-10933",
-        "OpenSSH 4.7p1": "CVE-2008-5161",
-        "OpenSSH 7.3": "CVE-2016-10009",
-        "OpenSSH 8.4p1": "CVE-2021-28041",
-        "OpenSSH 8.8p1": "CVE-2021-41617",
-        "OpenSSH 9.3p1": "CVE-2023-38408",
-        "OpenSSH 9.7p1": "CVE-2024-6387",
-        "OpenSSH 9.8p1": "CVE-2024-7589"
-    },
-    "telnet": {
-        "": "CVE-1999-0001"
-    },
-    "dns": {
-        "BIND 9.9.4": "CVE-2014-8500",
-        "BIND 9.16.11": "CVE-2020-8625",
-        "BIND 9.18.0": "CVE-2022-2795",
-        "BIND 9.18.18": "CVE-2023-3341",
-        "Microsoft Windows DNS Server": "CVE-2020-1350",
-        "Microsoft Windows DNS Server": "CVE-2022-26809",
-        "PowerDNS Recursor 4.5.1": "CVE-2022-27227",
-        "Unbound 1.13.1": "CVE-2021-25220",
-        "ISC BIND 9.18.21": "CVE-2023-50387"
-    },
-    "smb": {
-        "Microsoft Windows SMBv1": "CVE-2017-0143",
-        "Microsoft Windows SMBv1": "CVE-2017-0144",
-        "Microsoft Windows SMBv3": "CVE-2020-0796",
-        "Microsoft Windows SMBv3": "CVE-2023-23397",
-        "Samba 4.15.5": "CVE-2022-0336",
-        "Samba 4.17.7": "CVE-2023-0225",
-        "Samba 4.18.6": "CVE-2023-3961"
-    },
-    "exim": {
-        "Exim 4.91": "CVE-2019-10149",
-        "Exim 4.94": "CVE-2020-28018",
-        "Exim 4.94.2": "CVE-2021-27216",
-        "Exim 4.96": "CVE-2022-37436",
-        "Exim 4.97": "CVE-2023-42115"
-    },
-    "rdp": {
-        "Microsoft Windows RDP": "CVE-2019-0708",
-        "Microsoft Windows RDP": "CVE-2022-21893",
-        "Microsoft Windows RDP": "CVE-2023-21768",
-        "Microsoft Windows RDP Gateway": "CVE-2020-0609",
-        "Microsoft Windows RDP Gateway": "CVE-2022-30190"
-    },
-    "mail": {
-        "Microsoft Exchange Server": "CVE-2021-26855",
-        "Microsoft Exchange Server": "CVE-2022-41040",
-        "Microsoft Exchange Server": "CVE-2023-21529",
-        "Postfix 3.5.8": "CVE-2021-26342",
-        "Postfix 3.7.2": "CVE-2022-29274"
-    },
-    "vpn": {
-        "Cisco ASA 9.16.1": "CVE-2022-20866",
-        "Cisco ASA 9.17.1": "CVE-2023-20269",
-        "Fortinet FortiOS 6.0.4": "CVE-2018-13379",
-        "Fortinet FortiOS 7.0.5": "CVE-2022-29055",
-        "Fortinet FortiOS 7.2.2": "CVE-2022-42475",
-        "Pulse Secure Pulse Connect Secure 9.1R11": "CVE-2021-22893",
-        "SonicWall SSL VPN 10.2.0": "CVE-2021-20016",
-        "OpenVPN 2.5.1": "CVE-2021-3547"
-    },
-    "database": {
-        "Microsoft SQL Server 2019": "CVE-2022-29143",
-        "MongoDB 4.4.3": "CVE-2021-20333",
-        "MySQL 8.0.27": "CVE-2022-21278",
-        "Oracle Database 19c": "CVE-2021-2351",
-        "PostgreSQL 13.3": "CVE-2021-32027"
-    },
-    "snmp": {
-        "Net-SNMP 5.8": "CVE-2020-15862",
-        "SNMP Agent Default Community String": "CVE-1999-0517"
-    },
-    "ldap": {
-        "OpenLDAP 2.4.48": "CVE-2020-12243",
-        "Microsoft Active Directory": "CVE-2021-42287"
-    },
-    "ntp": {
-        "NTP 4.2.8p12": "CVE-2018-12327",
-        "NTP 4.2.8p15": "CVE-2020-13817"
-    },
-    "kerberos": {
-        "Microsoft Windows Kerberos": "CVE-2022-33679",
-        "Heimdal Kerberos 7.7.0": "CVE-2022-45142"
-    },
-    "sip": {
-        "Asterisk 18.4.0": "CVE-2021-26712",
-        "Kamailio 5.4.4": "CVE-2020-27507"
-    },
-    "imap": {
-        "Dovecot 2.3.10": "CVE-2020-24386",
-        "Cyrus IMAP 3.2.6": "CVE-2021-32056"
-    },
-    "webdav": {
-        "Apache httpd 2.4.48": "CVE-2021-33193",
-        "Microsoft IIS WebDAV": "CVE-2017-7269"
-    },
-    "rpc": {
-        "Microsoft Windows RPC": "CVE-2022-26809",
-        "SunRPC rpcbind": "CVE-2017-8779"
-    }
+    "ftp": [
+        {"version": "vsftpd 2.3.4",               "cve": "CVE-2011-2523", "severity": "Critical"},
+        {"version": "ProFTPD 1.3.6",               "cve": "CVE-2020-9273", "severity": "Critical"},
+        {"version": "Pure-FTPd 1.0.49",            "cve": "CVE-2020-11509", "severity": "Critical"},
+        {"version": "Microsoft IIS FTP Service 7.5","cve": "CVE-2010-3972", "severity": "Critical"}
+    ],
+    "http": [
+        {"version": "Apache httpd 2.4.7",           "cve": "CVE-2014-0118",  "severity": "Medium"},
+        {"version": "Apache httpd 2.4.49",          "cve": "CVE-2021-41773", "severity": "Critical"},
+        {"version": "Apache httpd 2.4.50",          "cve": "CVE-2021-42013", "severity": "Critical"},
+        {"version": "Apache httpd 2.4.51",          "cve": "CVE-2021-44224", "severity": "Medium"},
+        {"version": "Apache httpd 2.4.55",          "cve": "CVE-2023-25690", "severity": "Critical"},
+        {"version": "Apache httpd 2.4.57",          "cve": "CVE-2023-31122", "severity": "High"},
+        {"version": "Apache Log4j 2.14.1",          "cve": "CVE-2021-44228", "severity": "Critical"},
+        {"version": "Apache Struts 2.5.25",         "cve": "CVE-2020-17530", "severity": "Critical"},
+        {"version": "Apache Tomcat 9.0.43",         "cve": "CVE-2021-24122", "severity": "Medium"},
+        {"version": "Apache Tomcat 10.1.4",         "cve": "CVE-2023-44487", "severity": "High"},
+        {"version": "Atlassian Confluence 7.18.1",  "cve": "CVE-2022-26134", "severity": "Critical"},
+        {"version": "Drupal 9.2.6",                 "cve": "CVE-2022-25271", "severity": "High"},
+        {"version": "Microsoft IIS 10.0",           "cve": "CVE-2021-31166", "severity": "Critical"},
+        {"version": "Microsoft IIS 10.0",           "cve": "CVE-2022-21907", "severity": "Critical"},
+        {"version": "Microsoft IIS 10.0",           "cve": "CVE-2023-21596", "severity": "High"},
+        {"version": "nginx 1.20.0",                 "cve": "CVE-2021-23017", "severity": "Critical"},
+        {"version": "nginx 1.21.3",                 "cve": "CVE-2021-3618",  "severity": "Medium"},
+        {"version": "nginx 1.23.2",                 "cve": "CVE-2023-44487", "severity": "High"},
+        {"version": "Oracle WebLogic Server 12.2.1.4", "cve": "CVE-2020-14882", "severity": "Critical"},
+        {"version": "WordPress 5.8.1",              "cve": "CVE-2022-21661", "severity": "High"},
+        {"version": "WordPress 6.0.2",              "cve": "CVE-2023-2745",  "severity": "Medium"},
+        {"version": "WordPress 6.4.2",              "cve": "CVE-2024-3129",  "severity": "Medium"}
+    ],
+    "ssh": [
+        {"version": "Dropbear SSH 2020.80", "cve": "CVE-2020-36254", "severity": "High"},
+        {"version": "libssh 0.8.7",         "cve": "CVE-2018-10933", "severity": "Critical"},
+        {"version": "OpenSSH 4.7p1",        "cve": "CVE-2008-5161",  "severity": "Low"},
+        {"version": "OpenSSH 7.3",          "cve": "CVE-2016-10009", "severity": "High"},
+        {"version": "OpenSSH 8.4p1",        "cve": "CVE-2021-28041", "severity": "High"},
+        {"version": "OpenSSH 8.8p1",        "cve": "CVE-2021-41617", "severity": "High"},
+        {"version": "OpenSSH 9.3p1",        "cve": "CVE-2023-38408", "severity": "Critical"},
+        {"version": "OpenSSH 9.7p1",        "cve": "CVE-2024-6387",  "severity": "High"},
+        {"version": "OpenSSH 9.8p1",        "cve": "CVE-2024-7589",  "severity": "Critical"}
+    ],
+    "telnet": [
+        {"version": "", "cve": "CVE-1999-0001", "severity": "High"}
+    ],
+    "dns": [
+        {"version": "BIND 9.9.4",                 "cve": "CVE-2014-8500",  "severity": "High"},
+        {"version": "BIND 9.16.11",               "cve": "CVE-2020-8625",  "severity": "High"},
+        {"version": "BIND 9.18.0",                "cve": "CVE-2022-2795",  "severity": "Medium"},
+        {"version": "BIND 9.18.18",               "cve": "CVE-2023-3341",  "severity": "High"},
+        {"version": "ISC BIND 9.18.21",           "cve": "CVE-2023-50387", "severity": "High"},
+        {"version": "Microsoft Windows DNS Server","cve": "CVE-2020-1350",  "severity": "Critical"},
+        {"version": "Microsoft Windows DNS Server","cve": "CVE-2022-26809", "severity": "Critical"},
+        {"version": "PowerDNS Recursor 4.5.1",    "cve": "CVE-2022-27227", "severity": "High"},
+        {"version": "Unbound 1.13.1",             "cve": "CVE-2021-25220", "severity": "Medium"}
+    ],
+    "smb": [
+        {"version": "Microsoft Windows SMBv1", "cve": "CVE-2017-0143", "severity": "High"},
+        {"version": "Microsoft Windows SMBv1", "cve": "CVE-2017-0144", "severity": "High"},
+        {"version": "Microsoft Windows SMBv3", "cve": "CVE-2020-0796", "severity": "Critical"},
+        {"version": "Microsoft Windows SMBv3", "cve": "CVE-2023-23397", "severity": "Critical"},
+        {"version": "Samba 4.15.5",            "cve": "CVE-2022-0336", "severity": "Medium"},
+        {"version": "Samba 4.17.7",            "cve": "CVE-2023-0225", "severity": "Medium"},
+        {"version": "Samba 4.18.6",            "cve": "CVE-2023-3961", "severity": "Critical"}
+    ],
+    "exim": [
+        {"version": "Exim 4.91",   "cve": "CVE-2019-10149", "severity": "Critical"},
+        {"version": "Exim 4.94",   "cve": "CVE-2020-28018", "severity": "Critical"},
+        {"version": "Exim 4.94.2", "cve": "CVE-2021-27216", "severity": "High"},
+        {"version": "Exim 4.96",   "cve": "CVE-2022-37436", "severity": "Medium"},
+        {"version": "Exim 4.97",   "cve": "CVE-2023-42115", "severity": "Critical"}
+    ],
+    "rdp": [
+        {"version": "Microsoft Windows RDP",         "cve": "CVE-2019-0708", "severity": "Critical"},
+        {"version": "Microsoft Windows RDP",         "cve": "CVE-2022-21893", "severity": "High"},
+        {"version": "Microsoft Windows RDP",         "cve": "CVE-2023-21768", "severity": "High"},
+        {"version": "Microsoft Windows RDP Gateway", "cve": "CVE-2020-0609",  "severity": "Critical"},
+        {"version": "Microsoft Windows RDP Gateway", "cve": "CVE-2022-30190", "severity": "High"}
+    ],
+    "mail": [
+        {"version": "Microsoft Exchange Server", "cve": "CVE-2021-26855", "severity": "Critical"},
+        {"version": "Microsoft Exchange Server", "cve": "CVE-2022-41040", "severity": "High"},
+        {"version": "Microsoft Exchange Server", "cve": "CVE-2023-21529", "severity": "High"},
+        {"version": "Postfix 3.5.8",             "cve": "CVE-2021-26342", "severity": "Medium"},
+        {"version": "Postfix 3.7.2",             "cve": "CVE-2022-29274", "severity": "Medium"}
+    ],
+    "vpn": [
+        {"version": "Cisco ASA 9.16.1",                    "cve": "CVE-2022-20866", "severity": "High"},
+        {"version": "Cisco ASA 9.17.1",                    "cve": "CVE-2023-20269", "severity": "Medium"},
+        {"version": "Fortinet FortiOS 6.0.4",              "cve": "CVE-2018-13379", "severity": "Critical"},
+        {"version": "Fortinet FortiOS 7.0.5",              "cve": "CVE-2022-29055", "severity": "Medium"},
+        {"version": "Fortinet FortiOS 7.2.2",              "cve": "CVE-2022-42475", "severity": "Critical"},
+        {"version": "Pulse Secure Pulse Connect Secure 9.1R11", "cve": "CVE-2021-22893", "severity": "Critical"},
+        {"version": "SonicWall SSL VPN 10.2.0",            "cve": "CVE-2021-20016", "severity": "Critical"},
+        {"version": "OpenVPN 2.5.1",                       "cve": "CVE-2021-3547",  "severity": "High"}
+    ],
+    "database": [
+        {"version": "Microsoft SQL Server 2019", "cve": "CVE-2022-29143", "severity": "High"},
+        {"version": "MongoDB 4.4.3",             "cve": "CVE-2021-20333", "severity": "Medium"},
+        {"version": "MySQL 8.0.27",              "cve": "CVE-2022-21278", "severity": "Medium"},
+        {"version": "Oracle Database 19c",       "cve": "CVE-2021-2351",  "severity": "High"},
+        {"version": "PostgreSQL 13.3",           "cve": "CVE-2021-32027", "severity": "Critical"}
+    ],
+    "snmp": [
+        {"version": "Net-SNMP 5.8", "cve": "CVE-2020-15862", "severity": "High"},
+        {"version": "",             "cve": "CVE-1999-0517",  "severity": "High"}
+    ],
+    "ldap": [
+        {"version": "OpenLDAP 2.4.48",        "cve": "CVE-2020-12243", "severity": "High"},
+        {"version": "Microsoft Active Directory", "cve": "CVE-2021-42287", "severity": "High"}
+    ],
+    "ntp": [
+        {"version": "NTP 4.2.8p12", "cve": "CVE-2018-12327", "severity": "Critical"},
+        {"version": "NTP 4.2.8p15", "cve": "CVE-2020-13817", "severity": "High"}
+    ],
+    "kerberos": [
+        {"version": "Microsoft Windows Kerberos", "cve": "CVE-2022-33679", "severity": "High"},
+        {"version": "Heimdal Kerberos 7.7.0",     "cve": "CVE-2022-45142", "severity": "Critical"}
+    ],
+    "sip": [
+        {"version": "Asterisk 18.4.0",  "cve": "CVE-2021-26712", "severity": "Medium"},
+        {"version": "Kamailio 5.4.4",   "cve": "CVE-2020-27507", "severity": "Critical"}
+    ],
+    "imap": [
+        {"version": "Dovecot 2.3.10",   "cve": "CVE-2020-24386", "severity": "High"},
+        {"version": "Cyrus IMAP 3.2.6", "cve": "CVE-2021-32056", "severity": "High"}
+    ],
+    "webdav": [
+        {"version": "Apache httpd 2.4.48",  "cve": "CVE-2021-33193", "severity": "High"},
+        {"version": "Microsoft IIS WebDAV", "cve": "CVE-2017-7269",  "severity": "Critical"}
+    ],
+    "rpc": [
+        {"version": "Microsoft Windows RPC", "cve": "CVE-2022-26809", "severity": "Critical"},
+        {"version": "SunRPC rpcbind",        "cve": "CVE-2017-8779",  "severity": "High"}
+    ]
 }
