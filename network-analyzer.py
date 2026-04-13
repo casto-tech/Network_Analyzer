@@ -719,4 +719,4 @@ if __name__ == "__main__":
             
         with open(json_file, 'w') as f:
             json.dump(json_friendly_data, f, indent=4)
-        print(f"JSON results saved to {json_file}") 
+        print(f"JSON results saved to {json_file}")
