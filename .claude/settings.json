@@ -3,7 +3,16 @@
     "allow": [
       "Bash(ls /home/casto/Git/Network_Analyzer/*.py)",
       "Bash(python3 -c ':*)",
-      "Bash(venv/bin/python3 -c ':*)"
+      "Bash(venv/bin/python3 -c ':*)",
+      "Bash(python network-analyzer.py --help)",
+      "Bash(python /home/casto/Git/Network_Analyzer/network-analyzer.py --help)",
+      "Bash(python /home/casto/Git/Network_Analyzer/network-analyzer.py --version)",
+      "Bash(python /home/casto/Git/Network_Analyzer/network-analyzer.py 127.0.0.1 -p 22,80 -Pn -o /tmp/test_scan.md)",
+      "Read(//tmp/**)",
+      "Bash(python /home/casto/Git/Network_Analyzer/network-analyzer.py 127.0.0.1 scanme.nmap.org -p 22,80 -Pn -o /dev/null)",
+      "Bash(python /home/casto/Git/Network_Analyzer/network-analyzer.py 127.0.0.1 -p all -Pn -o /dev/null)",
+      "Bash(python /home/casto/Git/Network_Analyzer/network-analyzer.py notavalidhost.invalid 127.0.0.1 -p 22 -Pn -o /dev/null)",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('vulnerabilities.json'\\)\\); total=sum\\(len\\(v\\) for v in d.values\\(\\)\\); print\\(f'Services: {len\\(d\\)}, Total CVE entries: {total}'\\); [print\\(f'  {k}: {len\\(v\\)}'\\) for k,v in d.items\\(\\)]\")"
     ]
   }
 }

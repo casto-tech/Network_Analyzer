@@ -50,46 +50,69 @@ except FileNotFoundError:
 
 # ── Port / service mappings ──────────────────────────────────────────────────
 
-TLS_PORTS = {443, 465, 563, 636, 853, 989, 990, 993, 995, 3269, 5061, 8443}
+TLS_PORTS = {443, 465, 563, 636, 853, 989, 990, 993, 995, 3269, 5061, 8443, 8883}
 
 HTTP_PORTS = {
-    80, 443,            
-    3000, 5000, 5173,   
-    8000, 8008, 8080,   
-    8081, 8443, 8888,   
-    9000, 9090          
+    80, 443,              # Standard HTTP/HTTPS
+    1400,                 # Sonos HTTP API
+    3000, 5000, 5173,    # Dev servers
+    7547,                 # TR-069 CWMP (router management)
+    8000, 8008, 8080,    # Alternate HTTP
+    8081, 8443, 8888,    # Alternate HTTPS / admin panels
+    9000, 9090,           # Management interfaces
+    37777,                # Dahua IP cameras
 }
 
 COMMON_UDP_SERVICES = {
-    19: "chargen", 53: "dns", 67: "dhcp", 68: "dhcp", 69: "tftp",
-    123: "ntp", 137: "netbios-ns", 138: "netbios-dgm", 161: "snmp",
-    162: "snmptrap", 177: "xdmcp", 500: "isakmp", 520: "rip",
-    631: "ipp", 646: "ldp", 1434: "ms-sql-m", 1900: "ssdp",
-    5060: "sip", 5353: "mdns", 5355: "llmnr",
+    19: "chargen", 53: "dns",  67: "dhcp",  68: "dhcp",  69: "tftp",
+    123: "ntp",   137: "netbios-ns",        138: "netbios-dgm",
+    161: "snmp",  162: "snmptrap",          177: "xdmcp",
+    500: "isakmp", 520: "rip", 631: "ipp",  646: "ldp",
+    1434: "ms-sql-m",
+    1900: "upnp",    # UPnP / SSDP discovery
+    5060: "sip",  5353: "mdns",             5355: "llmnr",
+    5683: "coap",    # Constrained Application Protocol (IoT)
 }
 
 UDP_PROBES = {
     53: (
-        b'\xaa\xbb'              
-        b'\x01\x00'              
-        b'\x00\x01'              
-        b'\x00\x00\x00\x00\x00\x00'  
+        b'\xaa\xbb'
+        b'\x01\x00'
+        b'\x00\x01'
+        b'\x00\x00\x00\x00\x00\x00'
         b'\x07version\x04bind\x00'
-        b'\x00\x10'              
-        b'\x00\x03'              
+        b'\x00\x10'
+        b'\x00\x03'
     ),
     123: bytes([0x1b] + [0] * 47),
+    # UPnP M-SEARCH probe — elicits SSDP banner with device/firmware version
+    1900: (
+        b"M-SEARCH * HTTP/1.1\r\n"
+        b"HOST: 239.255.255.250:1900\r\n"
+        b'MAN: "ssdp:discover"\r\n'
+        b"MX: 1\r\n"
+        b"ST: ssdp:all\r\n\r\n"
+    ),
 }
 
 PORT_SERVICE_HINTS = {
-    21: "ftp",       22: "ssh",      23: "telnet",   25: "mail",
-    53: "dns",       80: "http",    110: "mail",    143: "imap",
-    389: "ldap",    443: "http",   445: "smb",     465: "mail",
-    587: "mail",    636: "ldap",   993: "imap",    995: "mail",
+    # Standard services
+    21: "ftp",       22: "ssh",       23: "telnet",   25: "mail",
+    53: "dns",       80: "http",     110: "mail",    143: "imap",
+    389: "ldap",    443: "http",    445: "smb",     465: "mail",
+    587: "mail",    636: "ldap",    993: "imap",    995: "mail",
+    88:  "kerberos", 111: "rpc",    135: "rpc",
     1194: "vpn",   1433: "database", 1521: "database",
-    3306: "database", 3389: "rdp", 5060: "sip",
-    5432: "database", 5900: "rdp", 6379: "database",
-    8080: "http",  8443: "http",  27017: "database",
+    3306: "database", 3389: "rdp",  5060: "sip",
+    5432: "database", 5900: "vnc",  6379: "database",
+    8080: "http",   8443: "http",  27017: "database",
+    # IoT / smart-home services
+    1400: "sonos",   # Sonos speaker HTTP API
+    1883: "mqtt",    # MQTT broker (plaintext)
+    7000: "airplay", # Apple AirPlay receiver
+    7547: "tr069",   # TR-069 CWMP (ISP router management)
+    8883: "mqtt",    # MQTT broker (TLS)
+    37777: "camera", # Dahua IP camera proprietary port
 }
 
 # ── Terminal colours ─────────────────────────────────────────────────────────
@@ -595,20 +618,46 @@ def write_report(filepath, targets_data, ports, ports_str):
 # ── Entry point ──────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Network Vulnerability Scanner")
-    parser.add_argument("target", help="IP address, hostname, or CIDR range")
-    parser.add_argument("ports", nargs="?", default="1-1024", help="Ports to scan (single, range, or comma-separated)")
-    parser.add_argument("-o", "--output", default="scan_results.md", help="Path for the Markdown report")
-    parser.add_argument("-j", "--json", action="store_true", help="Also output results to a JSON file")
-    parser.add_argument("-A", "--active", action="store_true", help="Enable active checks (FTP, Redis, Tomcat)")
-    parser.add_argument("-Pn", "--skip-ping", action="store_true", help="Skip ping sweep host discovery")
-    parser.add_argument("-sS", "--stealth", action="store_true", help="Perform Stealth SYN Scan (No Banners, requires admin & Scapy)")
-    parser.add_argument("-t", "--threads", type=int, default=100, help="Number of concurrent threads (default: 100)")
-    parser.add_argument("--timeout", type=float, default=1.0, help="TCP connection timeout in seconds (default: 1.0)")
+    parser = argparse.ArgumentParser(
+        description="Network Vulnerability Scanner — scans TCP/UDP ports and identifies known CVEs",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  %(prog)s 192.168.1.1
+  %(prog)s 192.168.1.1 192.168.1.2 scanme.nmap.org
+  %(prog)s 192.168.1.0/24 -p 22,80,443
+  %(prog)s 10.0.0.1 -p all -o report.md -j
+  %(prog)s 10.0.0.1 -p 1-1024 -sS -A -Pn
+        """,
+    )
+    parser.add_argument(
+        "targets", nargs="+",
+        help="One or more IPs, hostnames, or CIDR ranges (space-separated)",
+    )
+    parser.add_argument(
+        "-p", "--ports", default="1-1024", metavar="PORTS",
+        help="Ports to scan: single (80), range (1-1024), list (22,80,443), or 'all' for 1-65535. Default: 1-1024",
+    )
+    parser.add_argument("-o", "--output", default="scan_results.md", help="Path for the Markdown report (default: scan_results.md)")
+    parser.add_argument("-j", "--json", action="store_true", help="Also write results to a JSON file")
+    parser.add_argument("-A", "--active", action="store_true", help="Enable active checks (anonymous FTP, open Redis, Tomcat default creds)")
+    parser.add_argument("-Pn", "--skip-ping", action="store_true", help="Skip ping sweep — treat all targets as alive")
+    parser.add_argument("-sS", "--stealth", action="store_true", help="Stealth SYN scan — no banners, requires root and scapy")
+    parser.add_argument("-t", "--threads", type=int, default=100, help="Concurrent threads (default: 100)")
+    parser.add_argument("--timeout", type=float, default=1.0, help="TCP connect timeout in seconds (default: 1.0)")
+    parser.add_argument("--banner-timeout", type=float, default=3.0, dest="banner_timeout",
+                        help="Banner read timeout in seconds (default: 3.0)")
+    parser.add_argument("--version", action="version", version="%(prog)s 2.0")
 
     args = parser.parse_args()
 
-    ports = parse_ports(args.ports)
+    # Parse ports — support 'all' as a shorthand for the full range
+    if args.ports.strip().lower() == "all":
+        ports = list(range(1, 65536))
+        ports_str = "1-65535 (all ports)"
+    else:
+        ports = parse_ports(args.ports)
+        ports_str = args.ports
 
     # Validate Stealth Mode Dependencies
     if args.stealth:
@@ -621,14 +670,21 @@ if __name__ == "__main__":
             print("    Please run the script with 'sudo' or from an Admin prompt.\n")
             sys.exit(1)
 
-    try:
-        network = ipaddress.ip_network(args.target, strict=False)
-        targets = [str(ip) for ip in network.hosts()]
-    except ValueError:
-        if not validate_target(args.target):
-            print("Error: Invalid target IP or hostname.")
-            sys.exit(1)
-        targets = [args.target]
+    # Expand all targets — supports IPs, hostnames, and CIDR ranges
+    targets = []
+    for raw in args.targets:
+        try:
+            network = ipaddress.ip_network(raw, strict=False)
+            targets.extend(str(ip) for ip in network.hosts())
+        except ValueError:
+            if not validate_target(raw):
+                print(f"Error: Invalid target '{raw}' — skipping.")
+                continue
+            targets.append(raw)
+
+    if not targets:
+        print("Error: No valid targets to scan.")
+        sys.exit(1)
 
     if args.skip_ping:
         alive_targets = targets
@@ -654,7 +710,8 @@ if __name__ == "__main__":
                 vulns = check_vulnerability(service_guess, "", None)
                 tcp_open.append((p, service_guess, "Stealth Mode (No Banner)", vulns))
         else:
-            tcp_open = scan_tcp_ports(target, ports, connect_timeout=args.timeout, max_workers=args.threads)
+            tcp_open = scan_tcp_ports(target, ports, connect_timeout=args.timeout,
+                                      banner_timeout=args.banner_timeout, max_workers=args.threads)
         
         udp_results = scan_udp_ports(target, ports, timeout=max(2.0, args.timeout))
         
@@ -701,7 +758,7 @@ if __name__ == "__main__":
         })
 
     # Write Markdown Report
-    write_report(args.output, targets_data, ports, args.ports)
+    write_report(args.output, targets_data, ports, ports_str)
     print(f"\nScan complete. Results saved to {args.output}")
 
     # Write JSON Report if requested

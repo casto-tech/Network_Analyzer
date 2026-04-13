@@ -1,156 +1,195 @@
 {
     "ftp": [
-        {"version": "vsftpd 2.3.4",                "cve": "CVE-2011-2523",  "severity": "Critical"},
-        {"version": "ProFTPD 1.3.3",                "cve": "CVE-2010-4221",  "severity": "Critical"},
-        {"version": "ProFTPD 1.3.5",                "cve": "CVE-2015-3306",  "severity": "Critical"},
-        {"version": "ProFTPD 1.3.5",                "cve": "CVE-2019-12815", "severity": "Critical"},
-        {"version": "ProFTPD 1.3.6",                "cve": "CVE-2020-9273",  "severity": "Critical"},
-        {"version": "Pure-FTPd 1.0.49",             "cve": "CVE-2020-11509", "severity": "Critical"},
-        {"version": "Microsoft IIS FTP Service 7.5","cve": "CVE-2010-3972",  "severity": "Critical"}
+        {"version": "vsftpd 2.3.4",                 "cve": "CVE-2011-2523",  "severity": "Critical"},
+        {"version": "ProFTPD 1.3.3",                 "cve": "CVE-2010-4221",  "severity": "Critical"},
+        {"version": "ProFTPD 1.3.5",                 "cve": "CVE-2015-3306",  "severity": "Critical"},
+        {"version": "ProFTPD 1.3.5",                 "cve": "CVE-2019-12815", "severity": "Critical"},
+        {"version": "ProFTPD 1.3.6",                 "cve": "CVE-2019-18217", "severity": "Medium"},
+        {"version": "ProFTPD 1.3.6",                 "cve": "CVE-2020-9273",  "severity": "Critical"},
+        {"version": "Pure-FTPd 1.0.49",              "cve": "CVE-2020-11509", "severity": "Critical"},
+        {"version": "Microsoft IIS FTP Service 7.5", "cve": "CVE-2010-3972",  "severity": "Critical"}
     ],
 
     "http": [
-        {"version": "Apache httpd 2.4.7",              "cve": "CVE-2014-0118",  "severity": "Medium"},
-        {"version": "Apache httpd 2.4.17",             "cve": "CVE-2015-3183",  "severity": "High"},
-        {"version": "Apache httpd 2.4.39",             "cve": "CVE-2019-0211",  "severity": "High"},
-        {"version": "Apache httpd 2.4.49",             "cve": "CVE-2021-41773", "severity": "Critical"},
-        {"version": "Apache httpd 2.4.50",             "cve": "CVE-2021-42013", "severity": "Critical"},
-        {"version": "Apache httpd 2.4.51",             "cve": "CVE-2021-44224", "severity": "Medium"},
-        {"version": "Apache httpd 2.4.55",             "cve": "CVE-2023-25690", "severity": "Critical"},
-        {"version": "Apache httpd 2.4.57",             "cve": "CVE-2023-31122", "severity": "High"},
-        {"version": "Apache httpd 2.4.48",             "cve": "CVE-2021-33193", "severity": "High"},
+        {"version": "Apache httpd 2.4.7",              "cve": "CVE-2014-0118",   "severity": "Medium"},
+        {"version": "Apache httpd 2.4.17",             "cve": "CVE-2015-3183",   "severity": "High"},
+        {"version": "Apache httpd 2.4.39",             "cve": "CVE-2019-0211",   "severity": "High"},
+        {"version": "Apache httpd 2.4.48",             "cve": "CVE-2021-33193",  "severity": "High"},
+        {"version": "Apache httpd 2.4.49",             "cve": "CVE-2021-41773",  "severity": "Critical"},
+        {"version": "Apache httpd 2.4.50",             "cve": "CVE-2021-42013",  "severity": "Critical"},
+        {"version": "Apache httpd 2.4.51",             "cve": "CVE-2021-44224",  "severity": "Medium"},
+        {"version": "Apache httpd 2.4.52",             "cve": "CVE-2022-22720",  "severity": "Critical"},
+        {"version": "Apache httpd 2.4.54",             "cve": "CVE-2022-36760",  "severity": "Critical"},
+        {"version": "Apache httpd 2.4.55",             "cve": "CVE-2023-25690",  "severity": "Critical"},
+        {"version": "Apache httpd 2.4.57",             "cve": "CVE-2023-31122",  "severity": "High"},
 
-        {"version": "Apache Tomcat 8.5.51",            "cve": "CVE-2020-1938",  "severity": "Critical"},
-        {"version": "Apache Tomcat 9.0.36",            "cve": "CVE-2020-9484",  "severity": "High"},
-        {"version": "Apache Tomcat 9.0.43",            "cve": "CVE-2021-24122", "severity": "Medium"},
-        {"version": "Apache Tomcat 10.0.2",            "cve": "CVE-2021-25122", "severity": "High"},
-        {"version": "Apache Tomcat 10.1.4",            "cve": "CVE-2023-44487", "severity": "High"},
+        {"version": "Apache Tomcat 8.5.51",            "cve": "CVE-2020-1938",   "severity": "Critical"},
+        {"version": "Apache Tomcat 9.0.36",            "cve": "CVE-2020-9484",   "severity": "High"},
+        {"version": "Apache Tomcat 9.0.43",            "cve": "CVE-2021-24122",  "severity": "Medium"},
+        {"version": "Apache Tomcat 10.0.2",            "cve": "CVE-2021-25122",  "severity": "High"},
+        {"version": "Apache Tomcat 10.1.4",            "cve": "CVE-2023-44487",  "severity": "High"},
 
-        {"version": "Apache Log4j 2.14.1",             "cve": "CVE-2021-44228", "severity": "Critical"},
-        {"version": "Apache Log4j 2.16.0",             "cve": "CVE-2021-45046", "severity": "Critical"},
-        {"version": "Apache Log4j 2.17.0",             "cve": "CVE-2021-44832", "severity": "Medium"},
+        {"version": "Apache Log4j 2.14.1",             "cve": "CVE-2021-44228",  "severity": "Critical"},
+        {"version": "Apache Log4j 2.16.0",             "cve": "CVE-2021-45046",  "severity": "Critical"},
+        {"version": "Apache Log4j 2.17.0",             "cve": "CVE-2021-44832",  "severity": "Medium"},
 
-        {"version": "Apache Struts 2.5.25",            "cve": "CVE-2020-17530", "severity": "Critical"},
-        {"version": "Apache Struts 2.3.34",            "cve": "CVE-2017-5638",  "severity": "Critical"},
+        {"version": "Apache Struts 2.3.34",            "cve": "CVE-2017-5638",   "severity": "Critical"},
+        {"version": "Apache Struts 2.5.25",            "cve": "CVE-2020-17530",  "severity": "Critical"},
+        {"version": "Apache Struts 2.5.32",            "cve": "CVE-2023-50164",  "severity": "Critical"},
 
-        {"version": "Spring Framework 5.3.17",         "cve": "CVE-2022-22965", "severity": "Critical"},
-        {"version": "Spring Framework 5.2.19",         "cve": "CVE-2022-22950", "severity": "Medium"},
-        {"version": "Spring Cloud 3.1.6",              "cve": "CVE-2022-22963", "severity": "Critical"},
-        {"version": "Spring Data REST 2.6.8",          "cve": "CVE-2018-1273",  "severity": "Critical"},
-        {"version": "Spring Web Flow 2.4.8",           "cve": "CVE-2017-4971",  "severity": "High"},
+        {"version": "Spring Framework 5.2.19",         "cve": "CVE-2022-22950",  "severity": "Medium"},
+        {"version": "Spring Framework 5.3.17",         "cve": "CVE-2022-22965",  "severity": "Critical"},
+        {"version": "Spring Cloud 3.1.6",              "cve": "CVE-2022-22963",  "severity": "Critical"},
+        {"version": "Spring Data REST 2.6.8",          "cve": "CVE-2018-1273",   "severity": "Critical"},
+        {"version": "Spring Web Flow 2.4.8",           "cve": "CVE-2017-4971",   "severity": "High"},
 
-        {"version": "nginx 1.20.0",                    "cve": "CVE-2021-23017", "severity": "Critical"},
-        {"version": "nginx 1.21.3",                    "cve": "CVE-2021-3618",  "severity": "Medium"},
-        {"version": "nginx 1.23.2",                    "cve": "CVE-2023-44487", "severity": "High"},
+        {"version": "nginx 1.20.0",                    "cve": "CVE-2021-23017",  "severity": "Critical"},
+        {"version": "nginx 1.21.3",                    "cve": "CVE-2021-3618",   "severity": "Medium"},
+        {"version": "nginx 1.23.2",                    "cve": "CVE-2023-44487",  "severity": "High"},
 
-        {"version": "Microsoft IIS 7.5",               "cve": "CVE-2015-1635",  "severity": "Critical"},
-        {"version": "Microsoft IIS 10.0",              "cve": "CVE-2021-31166", "severity": "Critical"},
-        {"version": "Microsoft IIS 10.0",              "cve": "CVE-2022-21907", "severity": "Critical"},
-        {"version": "Microsoft IIS 10.0",              "cve": "CVE-2023-21596", "severity": "High"},
-        {"version": "Microsoft IIS WebDAV",            "cve": "CVE-2017-7269",  "severity": "Critical"},
+        {"version": "Microsoft IIS 7.5",               "cve": "CVE-2015-1635",   "severity": "Critical"},
+        {"version": "Microsoft IIS 10.0",              "cve": "CVE-2021-31166",  "severity": "Critical"},
+        {"version": "Microsoft IIS 10.0",              "cve": "CVE-2022-21907",  "severity": "Critical"},
+        {"version": "Microsoft IIS 10.0",              "cve": "CVE-2023-21596",  "severity": "High"},
+        {"version": "Microsoft IIS WebDAV",            "cve": "CVE-2017-7269",   "severity": "Critical"},
 
-        {"version": "Oracle WebLogic Server 12.2.1.4", "cve": "CVE-2020-14882", "severity": "Critical"},
-        {"version": "Oracle WebLogic Server 12.2.1.4", "cve": "CVE-2020-14750", "severity": "Critical"},
-        {"version": "Oracle WebLogic Server 14.1.1.0", "cve": "CVE-2023-21839", "severity": "Critical"},
+        {"version": "Oracle WebLogic Server 12.2.1.4", "cve": "CVE-2020-14882",  "severity": "Critical"},
+        {"version": "Oracle WebLogic Server 12.2.1.4", "cve": "CVE-2020-14750",  "severity": "Critical"},
+        {"version": "Oracle WebLogic Server 14.1.1.0", "cve": "CVE-2023-21839",  "severity": "Critical"},
 
-        {"version": "Atlassian Confluence 7.4.17",     "cve": "CVE-2022-26138", "severity": "Critical"},
-        {"version": "Atlassian Confluence 7.18.1",     "cve": "CVE-2022-26134", "severity": "Critical"},
-        {"version": "Atlassian Confluence 8.3.2",      "cve": "CVE-2023-22515", "severity": "Critical"},
-        {"version": "Atlassian Confluence 8.3.1",      "cve": "CVE-2023-22518", "severity": "Critical"},
-        {"version": "Atlassian Confluence 8.5.1",      "cve": "CVE-2023-22527", "severity": "Critical"},
-        {"version": "Atlassian Confluence 8.6.1",      "cve": "CVE-2024-21683", "severity": "High"},
+        {"version": "Atlassian Confluence 7.4.17",     "cve": "CVE-2022-26138",  "severity": "Critical"},
+        {"version": "Atlassian Confluence 7.18.1",     "cve": "CVE-2022-26134",  "severity": "Critical"},
+        {"version": "Atlassian Confluence 8.3.1",      "cve": "CVE-2023-22518",  "severity": "Critical"},
+        {"version": "Atlassian Confluence 8.3.2",      "cve": "CVE-2023-22515",  "severity": "Critical"},
+        {"version": "Atlassian Confluence 8.5.1",      "cve": "CVE-2023-22527",  "severity": "Critical"},
+        {"version": "Atlassian Confluence 8.6.1",      "cve": "CVE-2024-21683",  "severity": "High"},
 
-        {"version": "Atlassian Jira 8.13.18",          "cve": "CVE-2022-0540",  "severity": "Critical"},
-        {"version": "Atlassian Jira Service Mgmt 4.20","cve": "CVE-2023-22501", "severity": "Critical"},
+        {"version": "Atlassian Jira 8.13.18",          "cve": "CVE-2022-0540",   "severity": "Critical"},
+        {"version": "Atlassian Jira Service Mgmt 4.20","cve": "CVE-2023-22501",  "severity": "Critical"},
+        {"version": "Atlassian Bitbucket 8.3.0",       "cve": "CVE-2022-36804",  "severity": "Critical"},
 
-        {"version": "Atlassian Bitbucket 8.3.0",       "cve": "CVE-2022-36804", "severity": "Critical"},
+        {"version": "Drupal 8.5.0",                    "cve": "CVE-2018-7600",   "severity": "Critical"},
+        {"version": "Drupal 8.6.9",                    "cve": "CVE-2019-6340",   "severity": "Critical"},
+        {"version": "Drupal 9.2.6",                    "cve": "CVE-2022-25271",  "severity": "High"},
 
-        {"version": "Drupal 8.5.0",                    "cve": "CVE-2018-7600",  "severity": "Critical"},
-        {"version": "Drupal 8.6.9",                    "cve": "CVE-2019-6340",  "severity": "Critical"},
-        {"version": "Drupal 9.2.6",                    "cve": "CVE-2022-25271", "severity": "High"},
+        {"version": "WordPress 5.8.1",                 "cve": "CVE-2022-21661",  "severity": "High"},
+        {"version": "WordPress 6.0.2",                 "cve": "CVE-2023-2745",   "severity": "Medium"},
+        {"version": "WordPress 6.4.2",                 "cve": "CVE-2024-3129",   "severity": "Medium"},
 
-        {"version": "WordPress 5.8.1",                 "cve": "CVE-2022-21661", "severity": "High"},
-        {"version": "WordPress 6.0.2",                 "cve": "CVE-2023-2745",  "severity": "Medium"},
-        {"version": "WordPress 6.4.2",                 "cve": "CVE-2024-3129",  "severity": "Medium"},
+        {"version": "Magento 2.4.3",                   "cve": "CVE-2022-24086",  "severity": "Critical"},
+        {"version": "Adobe Commerce 2.4.3",            "cve": "CVE-2022-24087",  "severity": "Critical"},
+        {"version": "Adobe ColdFusion 2021.0",         "cve": "CVE-2023-26360",  "severity": "Critical"},
+        {"version": "Adobe ColdFusion 2023.0",         "cve": "CVE-2024-20767",  "severity": "Critical"},
 
-        {"version": "Magento 2.4.3",                   "cve": "CVE-2022-24086", "severity": "Critical"},
-        {"version": "Adobe Commerce 2.4.3",            "cve": "CVE-2022-24087", "severity": "Critical"},
-
-        {"version": "GitLab CE 11.9",                  "cve": "CVE-2021-22205", "severity": "Critical"},
-        {"version": "GitLab CE 16.1",                  "cve": "CVE-2023-7028",  "severity": "Critical"},
-        {"version": "GitLab EE 16.3",                  "cve": "CVE-2023-5009",  "severity": "Critical"},
-        {"version": "GitLab CE 16.6",                  "cve": "CVE-2024-0402",  "severity": "Critical"},
+        {"version": "GitLab CE 11.9",                  "cve": "CVE-2021-22205",  "severity": "Critical"},
+        {"version": "GitLab CE 16.1",                  "cve": "CVE-2023-7028",   "severity": "Critical"},
+        {"version": "GitLab EE 16.3",                  "cve": "CVE-2023-5009",   "severity": "Critical"},
+        {"version": "GitLab CE 16.6",                  "cve": "CVE-2024-0402",   "severity": "Critical"},
 
         {"version": "Jenkins 2.56",                    "cve": "CVE-2017-1000353","severity": "Critical"},
         {"version": "Jenkins 2.319",                   "cve": "CVE-2022-23253",  "severity": "Critical"},
         {"version": "Jenkins 2.441",                   "cve": "CVE-2024-23897",  "severity": "Critical"},
 
-        {"version": "Citrix ADC 13.0",                 "cve": "CVE-2019-19781", "severity": "Critical"},
-        {"version": "Citrix ADC 13.0-88.14",           "cve": "CVE-2022-27518", "severity": "Critical"},
-        {"version": "Citrix NetScaler ADC 13.1",       "cve": "CVE-2023-3519",  "severity": "Critical"},
-        {"version": "Citrix NetScaler ADC 13.1-49.13", "cve": "CVE-2023-4966",  "severity": "Critical"},
+        {"version": "Citrix ADC 13.0",                 "cve": "CVE-2019-19781",  "severity": "Critical"},
+        {"version": "Citrix ADC 13.0-88.14",           "cve": "CVE-2022-27518",  "severity": "Critical"},
+        {"version": "Citrix NetScaler ADC 13.1",       "cve": "CVE-2023-3519",   "severity": "Critical"},
+        {"version": "Citrix NetScaler ADC 13.1-49.13", "cve": "CVE-2023-4966",   "severity": "Critical"},
 
-        {"version": "VMware vCenter Server 7.0 U1",    "cve": "CVE-2021-21985", "severity": "Critical"},
-        {"version": "VMware vCenter Server 6.7 U3",    "cve": "CVE-2021-22005", "severity": "Critical"},
-        {"version": "VMware Workspace ONE 22.05",       "cve": "CVE-2022-22954", "severity": "Critical"},
-        {"version": "VMware Workspace ONE 22.06",       "cve": "CVE-2022-22972", "severity": "Critical"},
+        {"version": "VMware vCenter Server 6.7 U3",    "cve": "CVE-2021-22005",  "severity": "Critical"},
+        {"version": "VMware vCenter Server 7.0 U1",    "cve": "CVE-2021-21985",  "severity": "Critical"},
+        {"version": "VMware Workspace ONE 22.05",       "cve": "CVE-2022-22954",  "severity": "Critical"},
+        {"version": "VMware Workspace ONE 22.06",       "cve": "CVE-2022-22972",  "severity": "Critical"},
+        {"version": "VMware Aria Operations 8.10",      "cve": "CVE-2023-34048",  "severity": "Critical"},
 
-        {"version": "F5 BIG-IP 15.1.0",               "cve": "CVE-2020-5902",  "severity": "Critical"},
-        {"version": "F5 BIG-IP 16.1.2.2",             "cve": "CVE-2022-1388",  "severity": "Critical"},
-        {"version": "F5 BIG-IP 17.1.0",               "cve": "CVE-2023-46747", "severity": "Critical"},
-        {"version": "F5 BIG-IP 17.1.0",               "cve": "CVE-2023-46748", "severity": "High"},
+        {"version": "F5 BIG-IP 15.1.0",               "cve": "CVE-2020-5902",   "severity": "Critical"},
+        {"version": "F5 BIG-IP 16.1.2.2",             "cve": "CVE-2022-1388",   "severity": "Critical"},
+        {"version": "F5 BIG-IP 17.1.0",               "cve": "CVE-2023-46747",  "severity": "Critical"},
+        {"version": "F5 BIG-IP 17.1.0",               "cve": "CVE-2023-46748",  "severity": "High"},
 
-        {"version": "MOVEit Transfer 2023.0.0",        "cve": "CVE-2023-34362", "severity": "Critical"},
-        {"version": "MOVEit Transfer 2023.0.1",        "cve": "CVE-2023-35036", "severity": "Critical"},
-        {"version": "MOVEit Transfer 2023.0.2",        "cve": "CVE-2023-35708", "severity": "Critical"},
+        {"version": "MOVEit Transfer 2023.0.0",        "cve": "CVE-2023-34362",  "severity": "Critical"},
+        {"version": "MOVEit Transfer 2023.0.1",        "cve": "CVE-2023-35036",  "severity": "Critical"},
+        {"version": "MOVEit Transfer 2023.0.2",        "cve": "CVE-2023-35708",  "severity": "Critical"},
 
-        {"version": "PHP 7.1.33",                      "cve": "CVE-2019-11043", "severity": "Critical"},
-        {"version": "PHP 8.1.27",                      "cve": "CVE-2024-4577",  "severity": "Critical"},
+        {"version": "PHP 7.1.33",                      "cve": "CVE-2019-11043",  "severity": "Critical"},
+        {"version": "PHP 8.1.27",                      "cve": "CVE-2024-4577",   "severity": "Critical"},
 
-        {"version": "ManageEngine ADSelfService 6.1",  "cve": "CVE-2021-40539", "severity": "Critical"},
-        {"version": "ManageEngine ServiceDesk 14.0",   "cve": "CVE-2022-47966", "severity": "Critical"},
-        {"version": "ManageEngine OpManager 12.6",     "cve": "CVE-2023-47211", "severity": "Critical"},
+        {"version": "ManageEngine ADSelfService 6.1",  "cve": "CVE-2021-40539",  "severity": "Critical"},
+        {"version": "ManageEngine ServiceDesk 14.0",   "cve": "CVE-2022-47966",  "severity": "Critical"},
+        {"version": "ManageEngine OpManager 12.6",     "cve": "CVE-2023-47211",  "severity": "Critical"},
 
-        {"version": "SolarWinds Serv-U 15.2.3",        "cve": "CVE-2021-35211", "severity": "Critical"},
-        {"version": "SolarWinds Platform 2023.3",      "cve": "CVE-2023-35182", "severity": "Critical"},
+        {"version": "SolarWinds Serv-U 15.2.3",        "cve": "CVE-2021-35211",  "severity": "Critical"},
+        {"version": "SolarWinds Platform 2023.3",      "cve": "CVE-2023-35182",  "severity": "Critical"},
+        {"version": "SolarWinds Web Help Desk 12.7.2", "cve": "CVE-2024-28986",  "severity": "Critical"},
 
-        {"version": "Ivanti Connect Secure 9.1R17.2",  "cve": "CVE-2024-21887", "severity": "Critical"},
-        {"version": "Ivanti Connect Secure 22.2R0.2",  "cve": "CVE-2023-46805", "severity": "High"},
+        {"version": "Ivanti Connect Secure 9.1R17.2",  "cve": "CVE-2024-21887",  "severity": "Critical"},
+        {"version": "Ivanti Connect Secure 22.2R0.2",  "cve": "CVE-2023-46805",  "severity": "High"},
+        {"version": "Ivanti Connect Secure 9.1R18.3",  "cve": "CVE-2024-21893",  "severity": "High"},
 
-        {"version": "Liferay Portal 7.2.1",            "cve": "CVE-2020-7961",  "severity": "Critical"},
+        {"version": "Liferay Portal 7.2.1",            "cve": "CVE-2020-7961",   "severity": "Critical"},
 
-        {"version": "Adobe ColdFusion 2021.0",         "cve": "CVE-2023-26360", "severity": "Critical"},
-        {"version": "Adobe ColdFusion 2023.0",         "cve": "CVE-2024-20767", "severity": "Critical"},
+        {"version": "Progress Telerik UI 2017.2",      "cve": "CVE-2019-18935",  "severity": "Critical"},
 
-        {"version": "Roundcube 1.6.3",                 "cve": "CVE-2023-43770", "severity": "Medium"},
+        {"version": "Fortra GoAnywhere MFT 7.1.1",     "cve": "CVE-2023-0669",   "severity": "Critical"},
+        {"version": "PaperCut NG 22.0.5",              "cve": "CVE-2023-27350",  "severity": "Critical"},
+        {"version": "ConnectWise ScreenConnect 23.9.7","cve": "CVE-2024-1709",   "severity": "Critical"},
+        {"version": "CrushFTP 10.7.0",                 "cve": "CVE-2024-4040",   "severity": "Critical"},
+        {"version": "Veeam Backup Replication 12.0",   "cve": "CVE-2024-40711",  "severity": "Critical"},
+        {"version": "Microsoft SharePoint Server 2019","cve": "CVE-2023-24955",  "severity": "High"},
 
-        {"version": "JetBrains TeamCity 2023.11.3",    "cve": "CVE-2024-27198", "severity": "Critical"},
-        {"version": "JetBrains TeamCity 2023.05.3",    "cve": "CVE-2023-42793", "severity": "Critical"}
+        {"version": "Roundcube 1.5.5",                 "cve": "CVE-2023-5631",   "severity": "High"},
+        {"version": "Roundcube 1.6.3",                 "cve": "CVE-2023-43770",  "severity": "Medium"},
+        {"version": "Roundcube 1.6.7",                 "cve": "CVE-2024-37383",  "severity": "High"},
+
+        {"version": "JetBrains TeamCity 2023.05.3",    "cve": "CVE-2023-42793",  "severity": "Critical"},
+        {"version": "JetBrains TeamCity 2023.11.3",    "cve": "CVE-2024-27198",  "severity": "Critical"},
+
+        {"version": "Hikvision-Webs",                  "cve": "CVE-2021-36260",  "severity": "Critical"},
+        {"version": "Hikvision IP Camera",             "cve": "CVE-2022-28173",  "severity": "High"},
+        {"version": "GoAhead-Webs",                    "cve": "CVE-2017-7921",   "severity": "Critical"},
+        {"version": "Dahua Web Server",                "cve": "CVE-2021-33044",  "severity": "Critical"},
+        {"version": "Philips hue",                     "cve": "CVE-2020-6007",   "severity": "High"},
+        {"version": "TP-LINK",                         "cve": "CVE-2023-1389",   "severity": "High"},
+        {"version": "NETGEAR",                         "cve": "CVE-2022-27646",  "severity": "High"},
+        {"version": "MikroTik",                        "cve": "CVE-2018-14847",  "severity": "Critical"},
+        {"version": "Zyxel",                           "cve": "CVE-2022-30525",  "severity": "Critical"},
+        {"version": "Ubiquiti",                        "cve": "CVE-2021-22909",  "severity": "High"}
     ],
 
     "ssh": [
-        {"version": "Dropbear SSH 2020.80", "cve": "CVE-2020-36254", "severity": "High"},
-        {"version": "libssh 0.8.7",         "cve": "CVE-2018-10933", "severity": "Critical"},
-        {"version": "libssh2 1.9.0",        "cve": "CVE-2019-17498", "severity": "High"},
-        {"version": "OpenSSH 4.7p1",        "cve": "CVE-2008-5161",  "severity": "Low"},
-        {"version": "OpenSSH 7.2p2",        "cve": "CVE-2016-6210",  "severity": "Medium"},
-        {"version": "OpenSSH 7.3",          "cve": "CVE-2016-10009", "severity": "High"},
-        {"version": "OpenSSH 8.4p1",        "cve": "CVE-2021-28041", "severity": "High"},
-        {"version": "OpenSSH 8.8p1",        "cve": "CVE-2021-41617", "severity": "High"},
-        {"version": "OpenSSH 9.3p1",        "cve": "CVE-2023-38408", "severity": "Critical"},
-        {"version": "OpenSSH 9.7p1",        "cve": "CVE-2024-6387",  "severity": "High"},
-        {"version": "OpenSSH 9.8p1",        "cve": "CVE-2024-7589",  "severity": "Critical"}
+        {"version": "OpenSSH 4.7p1",        "cve": "CVE-2008-5161",   "severity": "Low"},
+        {"version": "OpenSSH 7.1p1",        "cve": "CVE-2016-0777",   "severity": "Medium"},
+        {"version": "OpenSSH 7.2p2",        "cve": "CVE-2016-6210",   "severity": "Medium"},
+        {"version": "OpenSSH 7.3",          "cve": "CVE-2016-10009",  "severity": "High"},
+        {"version": "OpenSSH 7.7",          "cve": "CVE-2018-15473",  "severity": "Medium"},
+        {"version": "OpenSSH 7.9",          "cve": "CVE-2019-6111",   "severity": "Medium"},
+        {"version": "OpenSSH 8.3p1",        "cve": "CVE-2020-15778",  "severity": "High"},
+        {"version": "OpenSSH 8.4p1",        "cve": "CVE-2021-28041",  "severity": "High"},
+        {"version": "OpenSSH 8.8p1",        "cve": "CVE-2021-41617",  "severity": "High"},
+        {"version": "OpenSSH 9.3p1",        "cve": "CVE-2023-38408",  "severity": "Critical"},
+        {"version": "OpenSSH 9.5",          "cve": "CVE-2023-48795",  "severity": "Medium"},
+        {"version": "OpenSSH 9.7p1",        "cve": "CVE-2024-6387",   "severity": "High"},
+        {"version": "OpenSSH 9.8p1",        "cve": "CVE-2024-7589",   "severity": "Critical"},
+        {"version": "Dropbear SSH 2020.80", "cve": "CVE-2020-36254",  "severity": "High"},
+        {"version": "libssh 0.8.7",         "cve": "CVE-2018-10933",  "severity": "Critical"},
+        {"version": "libssh2 1.9.0",        "cve": "CVE-2019-17498",  "severity": "High"}
     ],
 
     "telnet": [
-        {"version": "", "cve": "CVE-1999-0001", "severity": "High"}
+        {"version": "",                  "cve": "CVE-1999-0001",  "severity": "High"},
+        {"version": "netkit-telnet 0.17","cve": "CVE-2020-10188", "severity": "Critical"}
     ],
 
     "dns": [
         {"version": "BIND 9.9.4",                  "cve": "CVE-2014-8500",  "severity": "High"},
+        {"version": "BIND 9.9.7",                  "cve": "CVE-2015-5477",  "severity": "High"},
         {"version": "BIND 9.10.3",                 "cve": "CVE-2016-2776",  "severity": "High"},
+        {"version": "BIND 9.10.4",                 "cve": "CVE-2016-9131",  "severity": "High"},
+        {"version": "BIND 9.11.1",                 "cve": "CVE-2017-3143",  "severity": "High"},
         {"version": "BIND 9.11.3",                 "cve": "CVE-2018-5740",  "severity": "High"},
+        {"version": "BIND 9.12.4",                 "cve": "CVE-2019-6471",  "severity": "High"},
+        {"version": "BIND 9.16.2",                 "cve": "CVE-2020-8617",  "severity": "High"},
         {"version": "BIND 9.16.11",                "cve": "CVE-2020-8625",  "severity": "High"},
+        {"version": "BIND 9.16.19",                "cve": "CVE-2021-25218", "severity": "High"},
         {"version": "BIND 9.18.0",                 "cve": "CVE-2022-2795",  "severity": "Medium"},
         {"version": "BIND 9.18.18",                "cve": "CVE-2023-3341",  "severity": "High"},
         {"version": "ISC BIND 9.18.21",            "cve": "CVE-2023-50387", "severity": "High"},
@@ -163,15 +202,19 @@
     ],
 
     "smb": [
-        {"version": "Microsoft Windows SMBv1",       "cve": "CVE-2017-0143", "severity": "High"},
-        {"version": "Microsoft Windows SMBv1",       "cve": "CVE-2017-0144", "severity": "High"},
-        {"version": "Microsoft Windows SMBv3",       "cve": "CVE-2020-0796", "severity": "Critical"},
+        {"version": "Microsoft Windows SMBv1",       "cve": "CVE-2017-0143",  "severity": "High"},
+        {"version": "Microsoft Windows SMBv1",       "cve": "CVE-2017-0144",  "severity": "High"},
+        {"version": "Microsoft Windows SMBv3",       "cve": "CVE-2020-0796",  "severity": "Critical"},
         {"version": "Microsoft Windows SMBv3",       "cve": "CVE-2023-23397", "severity": "Critical"},
-        {"version": "Microsoft Windows Server 2019", "cve": "CVE-2020-1472", "severity": "Critical"},
-        {"version": "Microsoft Windows Server 2019", "cve": "CVE-2021-34527","severity": "Critical"},
+        {"version": "Microsoft Windows Server 2019", "cve": "CVE-2020-1472",  "severity": "Critical"},
+        {"version": "Microsoft Windows Server 2019", "cve": "CVE-2021-34527", "severity": "Critical"},
         {"version": "Microsoft Windows Server 2019", "cve": "CVE-2021-1675",  "severity": "High"},
         {"version": "Microsoft Windows Server 2022", "cve": "CVE-2022-26925", "severity": "High"},
         {"version": "Microsoft Windows Server 2022", "cve": "CVE-2024-38077", "severity": "Critical"},
+        {"version": "Samba 4.5.9",                   "cve": "CVE-2017-7494",  "severity": "Critical"},
+        {"version": "Samba 4.6.4",                   "cve": "CVE-2017-12163", "severity": "Medium"},
+        {"version": "Samba 4.9.5",                   "cve": "CVE-2019-3880",  "severity": "Medium"},
+        {"version": "Samba 4.12.15",                 "cve": "CVE-2021-20254", "severity": "Medium"},
         {"version": "Samba 4.15.5",                  "cve": "CVE-2022-0336",  "severity": "Medium"},
         {"version": "Samba 4.17.7",                  "cve": "CVE-2023-0225",  "severity": "Medium"},
         {"version": "Samba 4.18.6",                  "cve": "CVE-2023-3961",  "severity": "Critical"},
@@ -179,65 +222,78 @@
     ],
 
     "mail": [
-        {"version": "Microsoft Exchange Server 2019 CU8",  "cve": "CVE-2021-26855", "severity": "Critical"},
-        {"version": "Microsoft Exchange Server 2019 CU9",  "cve": "CVE-2021-34473", "severity": "Critical"},
-        {"version": "Microsoft Exchange Server 2019 CU9",  "cve": "CVE-2021-34523", "severity": "High"},
-        {"version": "Microsoft Exchange Server 2019 CU9",  "cve": "CVE-2021-31207", "severity": "Medium"},
-        {"version": "Microsoft Exchange Server 2019 CU11", "cve": "CVE-2022-41040", "severity": "High"},
-        {"version": "Microsoft Exchange Server 2019 CU11", "cve": "CVE-2022-41082", "severity": "High"},
-        {"version": "Microsoft Exchange Server 2016 CU23", "cve": "CVE-2023-21529", "severity": "High"},
-        {"version": "Microsoft Exchange Server",           "cve": "CVE-2024-21410", "severity": "Critical"},
+        {"version": "Microsoft Exchange Server 2019 CU8",  "cve": "CVE-2021-26855",  "severity": "Critical"},
+        {"version": "Microsoft Exchange Server 2019 CU9",  "cve": "CVE-2021-34473",  "severity": "Critical"},
+        {"version": "Microsoft Exchange Server 2019 CU9",  "cve": "CVE-2021-34523",  "severity": "High"},
+        {"version": "Microsoft Exchange Server 2019 CU9",  "cve": "CVE-2021-31207",  "severity": "Medium"},
+        {"version": "Microsoft Exchange Server 2019 CU11", "cve": "CVE-2022-41040",  "severity": "High"},
+        {"version": "Microsoft Exchange Server 2019 CU11", "cve": "CVE-2022-41082",  "severity": "High"},
+        {"version": "Microsoft Exchange Server 2019 CU12", "cve": "CVE-2022-23277",  "severity": "Critical"},
+        {"version": "Microsoft Exchange Server 2016 CU23", "cve": "CVE-2023-21529",  "severity": "High"},
+        {"version": "Microsoft Exchange Server",           "cve": "CVE-2024-21410",  "severity": "Critical"},
 
-        {"version": "Exim 4.87",                          "cve": "CVE-2017-16943", "severity": "Critical"},
-        {"version": "Exim 4.91",                          "cve": "CVE-2019-10149", "severity": "Critical"},
-        {"version": "Exim 4.94",                          "cve": "CVE-2020-28018", "severity": "Critical"},
-        {"version": "Exim 4.94.2",                        "cve": "CVE-2021-27216", "severity": "High"},
-        {"version": "Exim 4.96",                          "cve": "CVE-2022-37436", "severity": "Medium"},
-        {"version": "Exim 4.97",                          "cve": "CVE-2023-42115", "severity": "Critical"},
+        {"version": "Exim 4.87",                          "cve": "CVE-2017-16943",  "severity": "Critical"},
+        {"version": "Exim 4.91",                          "cve": "CVE-2019-10149",  "severity": "Critical"},
+        {"version": "Exim 4.94",                          "cve": "CVE-2020-28018",  "severity": "Critical"},
+        {"version": "Exim 4.94.2",                        "cve": "CVE-2021-27216",  "severity": "High"},
+        {"version": "Exim 4.96",                          "cve": "CVE-2022-37436",  "severity": "Medium"},
+        {"version": "Exim 4.97",                          "cve": "CVE-2023-42115",  "severity": "Critical"},
+        {"version": "Exim 4.97.1",                        "cve": "CVE-2024-39929",  "severity": "Critical"},
 
-        {"version": "Zimbra Collaboration 8.8.15",        "cve": "CVE-2022-27925", "severity": "High"},
-        {"version": "Zimbra Collaboration 9.0.0",         "cve": "CVE-2022-41352", "severity": "Critical"},
-        {"version": "Zimbra Collaboration 9.0.0",         "cve": "CVE-2023-34192", "severity": "Critical"},
-        {"version": "Zimbra Collaboration 10.0.2",        "cve": "CVE-2023-45207", "severity": "High"},
+        {"version": "Zimbra Collaboration 8.8.15",        "cve": "CVE-2022-27925",  "severity": "High"},
+        {"version": "Zimbra Collaboration 8.8.15",        "cve": "CVE-2023-37580",  "severity": "High"},
+        {"version": "Zimbra Collaboration 9.0.0",         "cve": "CVE-2022-41352",  "severity": "Critical"},
+        {"version": "Zimbra Collaboration 9.0.0",         "cve": "CVE-2023-34192",  "severity": "Critical"},
+        {"version": "Zimbra Collaboration 10.0.2",        "cve": "CVE-2023-45207",  "severity": "High"},
 
-        {"version": "Postfix 3.5.8",                      "cve": "CVE-2021-26342", "severity": "Medium"},
-        {"version": "Postfix 3.7.2",                      "cve": "CVE-2022-29274", "severity": "Medium"},
-        {"version": "Sendmail 8.17.2",                    "cve": "CVE-2023-51765", "severity": "High"}
+        {"version": "Postfix 3.5.8",                      "cve": "CVE-2021-26342",  "severity": "Medium"},
+        {"version": "Postfix 3.7.2",                      "cve": "CVE-2022-29274",  "severity": "Medium"},
+
+        {"version": "Sendmail 8.17.2",                    "cve": "CVE-2023-51765",  "severity": "High"},
+
+        {"version": "OpenSMTPD 6.6.2",                    "cve": "CVE-2020-7247",   "severity": "Critical"}
     ],
 
     "vpn": [
-        {"version": "Cisco ASA 9.16.1",                        "cve": "CVE-2022-20866", "severity": "High"},
-        {"version": "Cisco ASA 9.17.1",                        "cve": "CVE-2023-20269", "severity": "Medium"},
-        {"version": "Cisco ASA 9.18.1",                        "cve": "CVE-2023-20269", "severity": "Medium"},
-        {"version": "Cisco IOS XE 17.9.4a",                    "cve": "CVE-2023-20198", "severity": "Critical"},
-        {"version": "Cisco IOS XE 17.9.4a",                    "cve": "CVE-2023-20273", "severity": "High"},
+        {"version": "Cisco ASA 9.16.1",                        "cve": "CVE-2022-20866",  "severity": "High"},
+        {"version": "Cisco ASA 9.17.1",                        "cve": "CVE-2023-20269",  "severity": "Medium"},
+        {"version": "Cisco ASA 9.18.1",                        "cve": "CVE-2023-20269",  "severity": "Medium"},
+        {"version": "Cisco IOS XE 17.9.4a",                    "cve": "CVE-2023-20198",  "severity": "Critical"},
+        {"version": "Cisco IOS XE 17.9.4a",                    "cve": "CVE-2023-20273",  "severity": "High"},
 
-        {"version": "Fortinet FortiOS 6.0.4",                  "cve": "CVE-2018-13379", "severity": "Critical"},
-        {"version": "Fortinet FortiOS 6.2.7",                  "cve": "CVE-2022-40684", "severity": "Critical"},
-        {"version": "Fortinet FortiOS 7.0.5",                  "cve": "CVE-2022-29055", "severity": "Medium"},
-        {"version": "Fortinet FortiOS 7.2.2",                  "cve": "CVE-2022-42475", "severity": "Critical"},
-        {"version": "Fortinet FortiOS 7.4.0",                  "cve": "CVE-2023-27997", "severity": "Critical"},
-        {"version": "Fortinet FortiOS 7.4.2",                  "cve": "CVE-2024-21762", "severity": "Critical"},
+        {"version": "Fortinet FortiOS 6.0.4",                  "cve": "CVE-2018-13379",  "severity": "Critical"},
+        {"version": "Fortinet FortiOS 6.2.7",                  "cve": "CVE-2022-40684",  "severity": "Critical"},
+        {"version": "Fortinet FortiOS 7.0.5",                  "cve": "CVE-2022-29055",  "severity": "Medium"},
+        {"version": "Fortinet FortiOS 7.2.2",                  "cve": "CVE-2022-42475",  "severity": "Critical"},
+        {"version": "Fortinet FortiOS 7.4.0",                  "cve": "CVE-2023-27997",  "severity": "Critical"},
+        {"version": "Fortinet FortiOS 7.4.2",                  "cve": "CVE-2024-21762",  "severity": "Critical"},
+        {"version": "Fortinet FortiOS 7.4.2",                  "cve": "CVE-2024-23113",  "severity": "Critical"},
 
-        {"version": "Palo Alto PAN-OS 9.1.3",                  "cve": "CVE-2020-2021",  "severity": "Critical"},
-        {"version": "Palo Alto PAN-OS 8.1.17",                 "cve": "CVE-2021-3064",  "severity": "Critical"},
-        {"version": "Palo Alto PAN-OS 11.1.0",                 "cve": "CVE-2024-3400",  "severity": "Critical"},
+        {"version": "Palo Alto PAN-OS 8.1.17",                 "cve": "CVE-2021-3064",   "severity": "Critical"},
+        {"version": "Palo Alto PAN-OS 9.1.3",                  "cve": "CVE-2020-2021",   "severity": "Critical"},
+        {"version": "Palo Alto PAN-OS 11.1.0",                 "cve": "CVE-2024-3400",   "severity": "Critical"},
 
-        {"version": "Juniper Junos OS 20.4R3",                 "cve": "CVE-2023-36845", "severity": "Critical"},
-        {"version": "Juniper Junos OS 21.2R3",                 "cve": "CVE-2023-36844", "severity": "High"},
+        {"version": "Juniper Junos OS 20.4R3",                 "cve": "CVE-2023-36845",  "severity": "Critical"},
+        {"version": "Juniper Junos OS 21.2R3",                 "cve": "CVE-2023-36844",  "severity": "High"},
 
-        {"version": "Pulse Secure Pulse Connect Secure 9.1R11","cve": "CVE-2021-22893", "severity": "Critical"},
-        {"version": "Pulse Secure Pulse Connect Secure 9.1R14","cve": "CVE-2021-22937", "severity": "Critical"},
-        {"version": "Ivanti Connect Secure 22.3R1",            "cve": "CVE-2023-46805", "severity": "High"},
+        {"version": "Pulse Secure Pulse Connect Secure 9.1R11","cve": "CVE-2021-22893",  "severity": "Critical"},
+        {"version": "Pulse Secure Pulse Connect Secure 9.1R14","cve": "CVE-2021-22937",  "severity": "Critical"},
+        {"version": "Ivanti Connect Secure 22.3R1",            "cve": "CVE-2023-46805",  "severity": "High"},
+        {"version": "Ivanti Connect Secure 9.1R18.3",          "cve": "CVE-2024-21893",  "severity": "High"},
+        {"version": "Ivanti Connect Secure 22.4R2.2",          "cve": "CVE-2024-21888",  "severity": "High"},
 
-        {"version": "SonicWall SSL VPN 10.2.0",                "cve": "CVE-2021-20016", "severity": "Critical"},
-        {"version": "SonicWall SMA 10.2.0",                    "cve": "CVE-2021-20028", "severity": "Critical"},
+        {"version": "SonicWall SSL VPN 10.2.0",                "cve": "CVE-2021-20016",  "severity": "Critical"},
+        {"version": "SonicWall SMA 10.2.0",                    "cve": "CVE-2021-20028",  "severity": "Critical"},
 
-        {"version": "OpenVPN 2.5.1",                           "cve": "CVE-2021-3547",  "severity": "High"},
-        {"version": "OpenVPN 2.6.0",                           "cve": "CVE-2023-46849", "severity": "High"}
+        {"version": "OpenVPN 2.5.1",                           "cve": "CVE-2021-3547",   "severity": "High"},
+        {"version": "OpenVPN 2.6.0",                           "cve": "CVE-2023-46849",  "severity": "High"},
+
+        {"version": "Check Point Security Gateway R81.10",     "cve": "CVE-2024-24919",  "severity": "High"}
     ],
 
     "database": [
+        {"version": "Microsoft SQL Server 2016",  "cve": "CVE-2018-8273",  "severity": "High"},
+        {"version": "Microsoft SQL Server 2017",  "cve": "CVE-2019-1068",  "severity": "High"},
         {"version": "Microsoft SQL Server 2019",  "cve": "CVE-2022-29143", "severity": "High"},
         {"version": "Microsoft SQL Server 2019",  "cve": "CVE-2023-21568", "severity": "High"},
         {"version": "Microsoft SQL Server 2022",  "cve": "CVE-2024-28906", "severity": "High"},
@@ -247,7 +303,10 @@
         {"version": "MySQL 8.0.28",               "cve": "CVE-2022-21301", "severity": "High"},
         {"version": "MySQL 8.1.0",                "cve": "CVE-2023-22084", "severity": "High"},
 
+        {"version": "PostgreSQL 11.3",            "cve": "CVE-2019-10164", "severity": "High"},
+        {"version": "PostgreSQL 12.4",            "cve": "CVE-2020-25694", "severity": "High"},
         {"version": "PostgreSQL 13.3",            "cve": "CVE-2021-32027", "severity": "Critical"},
+        {"version": "PostgreSQL 14.0",            "cve": "CVE-2021-23214", "severity": "High"},
         {"version": "PostgreSQL 14.1",            "cve": "CVE-2022-1552",  "severity": "High"},
         {"version": "PostgreSQL 15.3",            "cve": "CVE-2023-39417", "severity": "High"},
 
@@ -257,63 +316,81 @@
         {"version": "Oracle Database 19c",        "cve": "CVE-2021-2351",  "severity": "High"},
         {"version": "Oracle Database 21c",        "cve": "CVE-2023-21893", "severity": "High"},
 
+        {"version": "Redis 6.0.13",               "cve": "CVE-2021-29477", "severity": "Critical"},
+        {"version": "Redis 6.2.4",                "cve": "CVE-2021-32627", "severity": "High"},
         {"version": "Redis 6.2.6",                "cve": "CVE-2022-0543",  "severity": "Critical"},
         {"version": "Redis 7.0.0",                "cve": "CVE-2022-24736", "severity": "Medium"},
         {"version": "Redis 7.0.8",                "cve": "CVE-2023-28425", "severity": "Medium"},
         {"version": "Redis 7.2.0",                "cve": "CVE-2023-41056", "severity": "High"},
 
         {"version": "Apache Cassandra 3.11.10",   "cve": "CVE-2021-44521", "severity": "Critical"},
-        {"version": "Elasticsearch 7.13.3",       "cve": "CVE-2021-22145", "severity": "Medium"}
+
+        {"version": "Elasticsearch 7.13.3",       "cve": "CVE-2021-22145", "severity": "Medium"},
+
+        {"version": "Apache Kafka 2.4.0",         "cve": "CVE-2023-25194", "severity": "High"},
+
+        {"version": "InfluxDB 1.7.6",             "cve": "CVE-2019-20933", "severity": "Critical"}
     ],
 
     "snmp": [
-        {"version": "Net-SNMP 5.8",  "cve": "CVE-2020-15862", "severity": "High"},
-        {"version": "Net-SNMP 5.9.3","cve": "CVE-2022-44792", "severity": "High"},
-        {"version": "",              "cve": "CVE-1999-0517",  "severity": "High"}
+        {"version": "Net-SNMP 5.7.3",  "cve": "CVE-2018-18066", "severity": "High"},
+        {"version": "Net-SNMP 5.8",    "cve": "CVE-2020-15862", "severity": "High"},
+        {"version": "Net-SNMP 5.9.3",  "cve": "CVE-2022-44792", "severity": "High"},
+        {"version": "",                "cve": "CVE-1999-0517",  "severity": "High"}
     ],
 
     "ldap": [
+        {"version": "OpenLDAP 2.4.44", "cve": "CVE-2017-14159", "severity": "Medium"},
         {"version": "OpenLDAP 2.4.48", "cve": "CVE-2020-12243", "severity": "High"},
         {"version": "OpenLDAP 2.4.57", "cve": "CVE-2021-27212", "severity": "High"},
         {"version": "OpenLDAP 2.5.13", "cve": "CVE-2023-2953",  "severity": "High"},
         {"version": "Microsoft Active Directory", "cve": "CVE-2021-42287", "severity": "High"},
-        {"version": "Microsoft Active Directory", "cve": "CVE-2022-26923", "severity": "Critical"}
+        {"version": "Microsoft Active Directory", "cve": "CVE-2022-26923", "severity": "Critical"},
+        {"version": "Microsoft Windows LDAP",     "cve": "CVE-2024-49113", "severity": "Critical"}
     ],
 
     "ntp": [
-        {"version": "NTP 4.2.8p8",  "cve": "CVE-2016-7433",  "severity": "Medium"},
-        {"version": "NTP 4.2.8p12", "cve": "CVE-2018-12327", "severity": "Critical"},
-        {"version": "NTP 4.2.8p15", "cve": "CVE-2020-13817", "severity": "High"},
-        {"version": "chrony 3.5",   "cve": "CVE-2020-14367", "severity": "High"}
+        {"version": "NTP 4.2.8p8",   "cve": "CVE-2016-7433",  "severity": "Medium"},
+        {"version": "NTP 4.2.8p10",  "cve": "CVE-2016-7434",  "severity": "Medium"},
+        {"version": "NTP 4.2.8p12",  "cve": "CVE-2018-12327", "severity": "Critical"},
+        {"version": "NTP 4.2.8p13",  "cve": "CVE-2019-8936",  "severity": "High"},
+        {"version": "NTP 4.2.8p15",  "cve": "CVE-2020-13817", "severity": "High"},
+        {"version": "chrony 3.5",    "cve": "CVE-2020-14367", "severity": "High"}
     ],
 
     "kerberos": [
         {"version": "Microsoft Windows Kerberos", "cve": "CVE-2020-17049", "severity": "High"},
         {"version": "Microsoft Windows Kerberos", "cve": "CVE-2022-33679", "severity": "High"},
         {"version": "Microsoft Windows Kerberos", "cve": "CVE-2022-37967", "severity": "High"},
+        {"version": "MIT Kerberos 5 1.17",        "cve": "CVE-2020-28196", "severity": "High"},
         {"version": "MIT Kerberos 5 1.19",        "cve": "CVE-2021-36222", "severity": "High"},
+        {"version": "MIT Kerberos 5 1.21",        "cve": "CVE-2023-36054", "severity": "High"},
         {"version": "Heimdal Kerberos 7.7.0",     "cve": "CVE-2022-45142", "severity": "Critical"},
         {"version": "Heimdal Kerberos 7.8.0",     "cve": "CVE-2022-3437",  "severity": "High"}
     ],
 
     "sip": [
-        {"version": "Asterisk 16.8.0",  "cve": "CVE-2019-13161", "severity": "Medium"},
-        {"version": "Asterisk 18.4.0",  "cve": "CVE-2021-26712", "severity": "Medium"},
-        {"version": "Asterisk 20.1.0",  "cve": "CVE-2023-37457", "severity": "High"},
-        {"version": "FreeSWITCH 1.10.6","cve": "CVE-2021-37624", "severity": "Critical"},
-        {"version": "Kamailio 5.4.4",   "cve": "CVE-2020-27507", "severity": "Critical"},
-        {"version": "Kamailio 5.6.0",   "cve": "CVE-2022-27907", "severity": "High"}
+        {"version": "Asterisk 16.8.0",   "cve": "CVE-2019-13161",  "severity": "Medium"},
+        {"version": "Asterisk 18.4.0",   "cve": "CVE-2021-26712",  "severity": "Medium"},
+        {"version": "Asterisk 18.11.0",  "cve": "CVE-2022-26498",  "severity": "High"},
+        {"version": "Asterisk 20.1.0",   "cve": "CVE-2023-37457",  "severity": "High"},
+        {"version": "FreeSWITCH 1.10.6", "cve": "CVE-2021-37624",  "severity": "Critical"},
+        {"version": "FreeSWITCH 1.10.6", "cve": "CVE-2021-41157",  "severity": "High"},
+        {"version": "Kamailio 5.4.4",    "cve": "CVE-2020-27507",  "severity": "Critical"},
+        {"version": "Kamailio 5.6.0",    "cve": "CVE-2022-27907",  "severity": "High"}
     ],
 
     "imap": [
         {"version": "Dovecot 2.3.10",   "cve": "CVE-2020-24386", "severity": "High"},
         {"version": "Dovecot 2.3.15",   "cve": "CVE-2022-30550", "severity": "High"},
         {"version": "Dovecot 2.3.20",   "cve": "CVE-2023-29197", "severity": "Medium"},
+        {"version": "Dovecot 2.3.21",   "cve": "CVE-2024-23185", "severity": "High"},
         {"version": "Cyrus IMAP 3.2.6", "cve": "CVE-2021-32056", "severity": "High"},
         {"version": "Cyrus IMAP 3.4.3", "cve": "CVE-2021-33582", "severity": "High"}
     ],
 
     "rpc": [
+        {"version": "Microsoft Windows RPC", "cve": "CVE-2022-22019", "severity": "High"},
         {"version": "Microsoft Windows RPC", "cve": "CVE-2022-26809", "severity": "Critical"},
         {"version": "Microsoft Windows RPC", "cve": "CVE-2023-21554", "severity": "Critical"},
         {"version": "Microsoft Windows RPC", "cve": "CVE-2024-20679", "severity": "High"},
@@ -321,12 +398,81 @@
     ],
 
     "rdp": [
-        {"version": "Windows Server 2008 R2", "cve": "CVE-2019-0708", "severity": "Critical"},
-        {"version": "Windows Server 2016",    "cve": "CVE-2019-1181", "severity": "Critical"},
-        {"version": "Windows Server 2019",    "cve": "CVE-2019-1182", "severity": "Critical"},
-        {"version": "Microsoft Windows RDP",  "cve": "CVE-2022-21893","severity": "High"},
-        {"version": "Microsoft Windows RDP",  "cve": "CVE-2023-21768","severity": "High"},
-        {"version": "Microsoft Windows RDP Gateway", "cve": "CVE-2020-0609",  "severity": "Critical"},
-        {"version": "Microsoft Windows RDP Gateway", "cve": "CVE-2022-30190", "severity": "High"}
+        {"version": "Windows Server 2008 R2",        "cve": "CVE-2019-0708",  "severity": "Critical"},
+        {"version": "Windows Server 2016",            "cve": "CVE-2019-1181",  "severity": "Critical"},
+        {"version": "Windows Server 2019",            "cve": "CVE-2019-1182",  "severity": "Critical"},
+        {"version": "Microsoft Windows RDP",          "cve": "CVE-2022-21893", "severity": "High"},
+        {"version": "Microsoft Windows RDP",          "cve": "CVE-2023-21768", "severity": "High"},
+        {"version": "Microsoft Windows RDP Gateway",  "cve": "CVE-2020-0609",  "severity": "Critical"},
+        {"version": "Microsoft Windows RDP Gateway",  "cve": "CVE-2022-30190", "severity": "High"},
+        {"version": "Microsoft Windows RDP Gateway",  "cve": "CVE-2023-28225", "severity": "High"},
+        {"version": "FreeRDP 2.3.0",                  "cve": "CVE-2021-41160", "severity": "High"},
+        {"version": "FreeRDP 2.6.0",                  "cve": "CVE-2022-24882", "severity": "High"}
+    ],
+
+    "vnc": [
+        {"version": "LibVNCServer 0.9.11",  "cve": "CVE-2019-15681", "severity": "High"},
+        {"version": "LibVNCServer 0.9.13",  "cve": "CVE-2020-14397", "severity": "Medium"},
+        {"version": "TigerVNC 1.12.0",      "cve": "CVE-2022-0283",  "severity": "High"},
+        {"version": "TigerVNC 1.13.0",      "cve": "CVE-2023-28486", "severity": "Medium"},
+        {"version": "RealVNC Server 6.7.2", "cve": "CVE-2022-41975", "severity": "High"}
+    ],
+
+    "mqtt": [
+        {"version": "Eclipse Mosquitto 1.6.3",  "cve": "CVE-2019-11779", "severity": "High"},
+        {"version": "Eclipse Mosquitto 2.0.9",  "cve": "CVE-2021-28166", "severity": "Medium"},
+        {"version": "Eclipse Mosquitto 2.0.12", "cve": "CVE-2023-0809",  "severity": "Medium"},
+        {"version": "Eclipse Mosquitto 2.0.15", "cve": "CVE-2023-28366", "severity": "Medium"}
+    ],
+
+    "upnp": [
+        {"version": "",            "cve": "CVE-2020-12695", "severity": "High"},
+        {"version": "MiniUPnPd 2.0", "cve": "CVE-2017-8798", "severity": "Medium"}
+    ],
+
+    "camera": [
+        {"version": "Hikvision IP Camera Firmware 5.4.0", "cve": "CVE-2017-7921",  "severity": "Critical"},
+        {"version": "Hikvision IP Camera",                "cve": "CVE-2021-36260", "severity": "Critical"},
+        {"version": "Hikvision IP Camera",                "cve": "CVE-2022-28173", "severity": "High"},
+        {"version": "Hikvision IP Camera",                "cve": "CVE-2023-28808", "severity": "High"},
+        {"version": "Dahua IP Camera",                    "cve": "CVE-2021-33044", "severity": "Critical"},
+        {"version": "Dahua IP Camera",                    "cve": "CVE-2021-33045", "severity": "Critical"},
+        {"version": "Dahua IP Camera",                    "cve": "CVE-2022-30563", "severity": "Medium"},
+        {"version": "Axis Network Camera",                "cve": "CVE-2018-10660", "severity": "Critical"},
+        {"version": "Axis Network Camera",                "cve": "CVE-2021-31986", "severity": "High"},
+        {"version": "Ring Video Doorbell 2",              "cve": "CVE-2019-9483",  "severity": "Medium"},
+        {"version": "Ring Video Doorbell 2",              "cve": "CVE-2019-9482",  "severity": "Medium"}
+    ],
+
+    "router": [
+        {"version": "Netgear R7000",             "cve": "CVE-2017-5521",  "severity": "High"},
+        {"version": "Netgear R6700v3",           "cve": "CVE-2022-27646", "severity": "High"},
+        {"version": "TP-Link TL-WR840N",         "cve": "CVE-2021-41653", "severity": "High"},
+        {"version": "TP-Link Archer AX21",       "cve": "CVE-2023-1389",  "severity": "High"},
+        {"version": "D-Link DIR-655C",           "cve": "CVE-2019-16920", "severity": "Critical"},
+        {"version": "D-Link DIR-810L",           "cve": "CVE-2021-45382", "severity": "Critical"},
+        {"version": "D-Link NAS",                "cve": "CVE-2024-3272",  "severity": "Critical"},
+        {"version": "ASUS RT-AX82U",             "cve": "CVE-2022-26376", "severity": "High"},
+        {"version": "MikroTik RouterOS 6.42",    "cve": "CVE-2018-14847", "severity": "Critical"},
+        {"version": "MikroTik RouterOS 6.49.6",  "cve": "CVE-2023-30799", "severity": "Critical"},
+        {"version": "Zyxel NAS326",              "cve": "CVE-2022-34747", "severity": "Critical"},
+        {"version": "Zyxel Firewall",            "cve": "CVE-2022-30525", "severity": "Critical"},
+        {"version": "Ubiquiti UniFi 6.2.26",     "cve": "CVE-2021-22909", "severity": "High"}
+    ],
+
+    "sonos": [
+        {"version": "Sonos Era 100", "cve": "CVE-2023-27353", "severity": "Critical"},
+        {"version": "Sonos Era 100", "cve": "CVE-2023-27354", "severity": "High"}
+    ],
+
+    "airplay": [
+        {"version": "Apple AirPlay SDK", "cve": "CVE-2025-24252", "severity": "Critical"},
+        {"version": "Apple AirPlay SDK", "cve": "CVE-2025-24132", "severity": "Critical"},
+        {"version": "Apple AirPlay SDK", "cve": "CVE-2025-24137", "severity": "Critical"}
+    ],
+
+    "tr069": [
+        {"version": "RomPager 4.34",   "cve": "CVE-2014-9222", "severity": "Critical"},
+        {"version": "Netgear TR-069",  "cve": "CVE-2017-6334", "severity": "High"}
     ]
 }
