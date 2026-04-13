@@ -314,6 +314,18 @@ def parse_ports(ports_str):
     return list(dict.fromkeys(ports))
 
 
+def _fingerprint_port(target, port):
+    """Banner-grab and classify a single open TCP port.
+
+    Returns (port, service, version, vulns) so results can be collected
+    from multiple threads and sorted afterwards.
+    """
+    banner = get_banner(target, port)
+    service, version = parse_service_version(banner, port)
+    vulns = check_vulnerability(service, version, banner)
+    return port, service, version, vulns
+
+
 def print_port_results(port, protocol, service, version, vulns):
     """Print a single port's findings to the terminal."""
     label = f"{protocol}/{port}"
@@ -446,19 +458,28 @@ if __name__ == "__main__":
         tcp_open = []
         udp_open = []
 
-        for port in ports:
-            if port in open_tcp_ports:
-                banner          = get_banner(target, port)
-                service, version = parse_service_version(banner, port)
-                vulns           = check_vulnerability(service, version, banner)
-                print_port_results(port, "TCP", service, version, vulns)
-                tcp_open.append((port, service, version, vulns))
+        if open_tcp_ports:
+            with tqdm.tqdm(total=len(open_tcp_ports), desc="Fingerprinting TCP ports") as pbar:
+                with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
+                    futures = {
+                        executor.submit(_fingerprint_port, target, port): port
+                        for port in open_tcp_ports
+                    }
+                    for future in concurrent.futures.as_completed(futures):
+                        tcp_open.append(future.result())
+                        pbar.update(1)
+            tcp_open.sort(key=lambda x: x[0])
 
         for port in open_udp_ports:
             service = COMMON_UDP_SERVICES.get(port, "unknown")
             vulns   = check_vulnerability(service, "", None)
-            print_port_results(port, "UDP", service, "", vulns)
             udp_open.append((port, service, vulns))
+
+        print(f"\nResults for {target}:")
+        for port, service, version, vulns in tcp_open:
+            print_port_results(port, "TCP", service, version, vulns)
+        for port, service, vulns in udp_open:
+            print_port_results(port, "UDP", service, "", vulns)
 
         targets_data.append({"target": target, "tcp_open": tcp_open, "udp_open": udp_open})
 
