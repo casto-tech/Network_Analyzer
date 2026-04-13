@@ -32,10 +32,16 @@ except FileNotFoundError:
 # ── Port / service mappings ──────────────────────────────────────────────────
 
 # Ports where a TLS handshake must happen before any data is exchanged
-TLS_PORTS = {443, 465, 636, 993, 995, 8443}
+TLS_PORTS = {443, 465, 563, 636, 853, 989, 990, 993, 995, 3269, 5061, 8443}
 
 # Ports where we send an HTTP HEAD request to retrieve the Server header
-HTTP_PORTS = {80, 443, 8000, 8080, 8443, 8888}
+HTTP_PORTS = {
+    80, 443,            # Standard
+    3000, 5000, 5173,   # Dev Frameworks
+    8000, 8008, 8080,   # Common Alternatives
+    8081, 8443, 8888,   # Alternatives/Proxies
+    9000, 9090          # Monitoring/Management
+}
 
 # Well-known UDP services; only these are probed during a UDP scan
 COMMON_UDP_SERVICES = {
