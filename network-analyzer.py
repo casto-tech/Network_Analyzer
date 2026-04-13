@@ -3,6 +3,7 @@ import json
 import sys
 import os
 import re
+import ssl
 import ctypes
 import ipaddress
 import logging
@@ -28,34 +29,59 @@ except FileNotFoundError:
     print(f"Error: vulnerabilities.json not found at {VULN_DB_PATH}. Exiting.")
     sys.exit(1)
 
-# Common UDP services keyed by port number
+# ── Port / service mappings ──────────────────────────────────────────────────
+
+# Ports where a TLS handshake must happen before any data is exchanged
+TLS_PORTS = {443, 465, 636, 993, 995, 8443}
+
+# Ports where we send an HTTP HEAD request to retrieve the Server header
+HTTP_PORTS = {80, 443, 8000, 8080, 8443, 8888}
+
+# Well-known UDP services; only these are probed during a UDP scan
 COMMON_UDP_SERVICES = {
     19: "chargen", 53: "dns", 67: "dhcp", 68: "dhcp", 69: "tftp",
     123: "ntp", 137: "netbios-ns", 138: "netbios-dgm", 161: "snmp",
     162: "snmptrap", 177: "xdmcp", 500: "isakmp", 520: "rip",
     631: "ipp", 646: "ldp", 1434: "ms-sql-m", 1900: "ssdp",
-    5060: "sip", 5353: "mdns", 5355: "llmnr"
+    5060: "sip", 5353: "mdns", 5355: "llmnr",
 }
 
-# TCP port-to-service hints used when banner grabbing fails
+# Service-specific UDP payloads; empty bytes used as a fallback
+UDP_PROBES = {
+    # DNS — standard A-record query for "version.bind" (elicits a response
+    # from any recursive or authoritative resolver)
+    53: (
+        b'\xaa\xbb'              # Transaction ID
+        b'\x01\x00'              # Flags: standard query, recursion desired
+        b'\x00\x01'              # QDCOUNT: 1 question
+        b'\x00\x00\x00\x00\x00\x00'  # ANCOUNT / NSCOUNT / ARCOUNT
+        b'\x07version\x04bind\x00'
+        b'\x00\x10'              # QTYPE: TXT
+        b'\x00\x03'              # QCLASS: CHAOS
+    ),
+    # NTP — mode 3 client request (48 bytes, version 3)
+    123: bytes([0x1b] + [0] * 47),
+}
+
+# TCP port → service name; used when banner grabbing yields nothing
 PORT_SERVICE_HINTS = {
-    21: "ftp", 22: "ssh", 23: "telnet", 25: "mail", 53: "dns",
-    80: "http", 110: "mail", 143: "imap", 389: "ldap", 443: "http",
-    445: "smb", 465: "mail", 587: "mail", 636: "ldap", 993: "imap",
-    995: "mail", 1194: "vpn", 1433: "database", 1521: "database",
-    3306: "database", 3389: "rdp", 5060: "sip", 5432: "database",
-    5900: "rdp", 6379: "database", 8080: "http", 8443: "http",
-    27017: "database"
+    21: "ftp",       22: "ssh",      23: "telnet",   25: "mail",
+    53: "dns",       80: "http",    110: "mail",    143: "imap",
+    389: "ldap",    443: "http",   445: "smb",     465: "mail",
+    587: "mail",    636: "ldap",   993: "imap",    995: "mail",
+    1194: "vpn",   1433: "database", 1521: "database",
+    3306: "database", 3389: "rdp", 5060: "sip",
+    5432: "database", 5900: "rdp", 6379: "database",
+    8080: "http",  8443: "http",  27017: "database",
 }
 
-# Ports that speak HTTP — we send a HEAD request to get the Server header
-HTTP_PORTS = {80, 443, 8000, 8080, 8443, 8888}
+# ── Terminal colours ─────────────────────────────────────────────────────────
 
 SEVERITY_COLORS = {
-    "Critical": "\033[91m",  # bright red
-    "High":     "\033[93m",  # yellow
-    "Medium":   "\033[94m",  # blue
-    "Low":      "\033[96m",  # cyan
+    "Critical": "\033[91m",
+    "High":     "\033[93m",
+    "Medium":   "\033[94m",
+    "Low":      "\033[96m",
 }
 RESET = "\033[0m"
 
@@ -65,41 +91,95 @@ def _color(text, severity):
     return f"{color}{text}{RESET}" if color else text
 
 
-def _tcp_connect(target, port, timeout):
-    """Try a single TCP connect; return the port number if open, else None."""
+# ── Scanning ─────────────────────────────────────────────────────────────────
+
+def _tcp_probe(target, port, connect_timeout, banner_timeout):
+    """Open one TCP connection, grab the banner, and return scan results.
+
+    Combines the connect and fingerprint steps so each port uses exactly one
+    socket.  Returns (port, service, version, vulns) when the port is open,
+    or None when it is closed / filtered.
+    """
     try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(timeout)
-        err = sock.connect_ex((target, port))
-        sock.close()
-        return port if err == 0 else None
-    except socket.error:
+        raw_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        raw_sock.settimeout(connect_timeout)
+        if raw_sock.connect_ex((target, port)) != 0:
+            raw_sock.close()
+            return None
+
+        # Port is open — switch to a longer timeout for banner reading
+        raw_sock.settimeout(banner_timeout)
+
+        # Upgrade to TLS for encrypted ports
+        if port in TLS_PORTS:
+            ctx = ssl.create_default_context()
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
+            try:
+                sock = ctx.wrap_socket(raw_sock, server_hostname=target)
+            except ssl.SSLError:
+                sock = raw_sock          # fall back to plaintext on TLS failure
+        else:
+            sock = raw_sock
+
+        # For HTTP ports send a HEAD request so the Server header is returned
+        if port in HTTP_PORTS:
+            try:
+                sock.sendall(
+                    b"HEAD / HTTP/1.0\r\n"
+                    b"Host: " + target.encode() + b"\r\n"
+                    b"User-Agent: NetworkAnalyzer/1.0\r\n\r\n"
+                )
+            except (socket.error, ssl.SSLError):
+                pass
+
+        # Read up to 4 KB of banner / response data
+        try:
+            banner = sock.recv(4096).decode('utf-8', errors='ignore').strip() or None
+        except (socket.timeout, socket.error, ssl.SSLError):
+            banner = None
+
+        try:
+            sock.close()
+        except Exception:
+            pass
+
+        service, version = parse_service_version(banner, port)
+        vulns = check_vulnerability(service, version, banner)
+        return port, service, version, vulns
+
+    except (socket.error, ssl.SSLError, OSError):
         return None
 
 
-def scan_tcp_ports(target, ports, timeout=1, max_workers=150):
-    """Scan TCP ports via threaded connect() and return a list of open ports."""
-    open_ports = []
-    with tqdm.tqdm(total=len(ports), desc="Scanning TCP ports") as pbar:
+def scan_tcp_ports(target, ports, connect_timeout=1, banner_timeout=3, max_workers=100):
+    """Scan every port in *ports*, grab banners, and identify services.
+
+    Returns a list of (port, service, version, vulns) tuples — only for
+    ports that are open — sorted by port number.
+    """
+    results = []
+    with tqdm.tqdm(total=len(ports), desc="Scanning TCP ports", unit="port") as pbar:
         with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = {
-                executor.submit(_tcp_connect, target, port, timeout): port
+                executor.submit(_tcp_probe, target, port, connect_timeout, banner_timeout): port
                 for port in ports
             }
             for future in concurrent.futures.as_completed(futures):
                 result = future.result()
                 if result is not None:
-                    open_ports.append(result)
+                    results.append(result)
                 pbar.update(1)
-    return open_ports
+    return sorted(results, key=lambda x: x[0])
 
 
 def _udp_probe(target, port, timeout):
-    """Send an empty UDP packet and return the port if the host replies."""
+    """Send a service-specific (or empty) UDP packet; return port on reply."""
+    probe = UDP_PROBES.get(port, b'')
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sock.settimeout(timeout)
-        sock.sendto(b'', (target, port))
+        sock.sendto(probe, (target, port))
         sock.recvfrom(1024)
         sock.close()
         return port
@@ -110,15 +190,16 @@ def _udp_probe(target, port, timeout):
 
 
 def scan_udp_ports(target, ports, timeout=2):
-    """Probe well-known UDP service ports for responses.
+    """Probe well-known UDP service ports that fall within *ports*.
 
-    Only ports listed in COMMON_UDP_SERVICES are checked — probing arbitrary
-    UDP ports with an empty packet is unreliable since most services ignore
-    them, and scanning all 65535 ports would take forever.
+    Only ports listed in COMMON_UDP_SERVICES are tested — probing arbitrary
+    UDP ports with generic payloads yields almost no useful signal.
     """
     known_ports = [p for p in ports if p in COMMON_UDP_SERVICES]
     open_ports = []
-    with tqdm.tqdm(total=len(known_ports), desc="Scanning UDP ports") as pbar:
+    if not known_ports:
+        return open_ports
+    with tqdm.tqdm(total=len(known_ports), desc="Scanning UDP ports", unit="port") as pbar:
         with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
             futures = {
                 executor.submit(_udp_probe, target, port, timeout): port
@@ -132,40 +213,23 @@ def scan_udp_ports(target, ports, timeout=2):
     return open_ports
 
 
-def get_banner(ip, port):
-    """Grab a service banner from an open TCP port.
-
-    For HTTP ports a HEAD request is sent first so the Server header is
-    included in the response.
-    """
-    try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(3)
-        sock.connect((ip, port))
-        if port in HTTP_PORTS:
-            sock.send(b"HEAD / HTTP/1.0\r\nHost: " + ip.encode() + b"\r\n\r\n")
-        banner = sock.recv(2048).decode('utf-8', errors='ignore').strip()
-        sock.close()
-        return banner or None
-    except (socket.error, socket.timeout, UnicodeDecodeError):
-        return None
-
+# ── Service / version detection ──────────────────────────────────────────────
 
 def parse_service_version(banner, port=None):
-    """Return (service, version) extracted from a banner string.
+    """Return (service, version) from a banner string.
 
-    Falls back to a port-number hint when the banner is absent or
-    unrecognised.
+    Detection order matters — protocols that share the same opening bytes
+    (SSH vs other, "220" FTP vs SMTP) are disambiguated by checking the most
+    specific pattern first.
     """
     if not banner:
-        service = PORT_SERVICE_HINTS.get(port, "unknown") if port else "unknown"
-        return service, ""
+        return (PORT_SERVICE_HINTS.get(port, "unknown") if port else "unknown"), ""
 
-    # SSH  e.g. "SSH-2.0-OpenSSH_9.3p1 Ubuntu-3ubuntu0.5"
+    # ── SSH ──────────────────────────────────────────────────────────────────
     if banner.startswith("SSH-"):
-        sw_field = banner.split()[0][4:]         # "2.0-OpenSSH_9.3p1"
+        sw_field = banner.split()[0][4:]          # "2.0-OpenSSH_9.3p1"
         if '-' in sw_field:
-            sw = sw_field.split('-', 1)[1]       # "OpenSSH_9.3p1"
+            sw = sw_field.split('-', 1)[1]        # "OpenSSH_9.3p1"
             sw_lower = sw.lower()
             if sw_lower.startswith('openssh_'):
                 return "ssh", "OpenSSH " + sw[8:]
@@ -176,67 +240,95 @@ def parse_service_version(banner, port=None):
             return "ssh", sw.replace('_', ' ')
         return "ssh", sw_field
 
-    # HTTP  look for Server header in the response
-    if "HTTP/" in banner or re.search(r'Server:', banner, re.IGNORECASE):
+    # ── IMAP — "* OK" prefix (must check before "220" FTP/SMTP) ─────────────
+    if banner.startswith("* OK"):
+        for pattern, fmt in [
+            (r'Dovecot(?:\s+([\d.]+))?',  'Dovecot {}'),
+            (r'Cyrus\s+IMAP\s+([\d.]+)',  'Cyrus IMAP {}'),
+        ]:
+            m = re.search(pattern, banner, re.IGNORECASE)
+            if m:
+                ver = m.group(1) or ""
+                return "imap", fmt.format(ver).strip()
+        return "imap", ""
+
+    # ── POP3 ─────────────────────────────────────────────────────────────────
+    if banner.startswith("+OK"):
+        return PORT_SERVICE_HINTS.get(port, "mail"), ""
+
+    # ── SMTP — port-disambiguated "220" (must check BEFORE generic FTP) ──────
+    if banner.startswith("220") and port in (25, 465, 587, 2525):
+        body = banner[4:].strip()
+        for pattern, fmt in [
+            (r'Postfix(?:\s+([\d.]+))?',            'Postfix {}'),
+            (r'Exim\s+([\d.]+)',                    'Exim {}'),
+            (r'Zimbra\s+([\d.]+)',                  'Zimbra {}'),
+            (r'Sendmail\s+([\d.]+)',                'Sendmail {}'),
+            (r'Microsoft\s+Exchange\s+Server',      'Microsoft Exchange Server'),
+        ]:
+            m = re.search(pattern, body, re.IGNORECASE)
+            if m:
+                ver = (m.group(1) or "") if m.lastindex else ""
+                return "mail", fmt.format(ver).strip()
+        return "mail", body[:80]
+
+    # ── FTP — any remaining "220" banner ─────────────────────────────────────
+    if banner.startswith("220"):
+        body = banner[4:].strip()
+        for pattern, fmt in [
+            (r'vsftpd\s+([\d.]+)',                      'vsftpd {}'),
+            (r'ProFTPD\s+([\d.]+)',                     'ProFTPD {}'),
+            (r'Pure-FTPd\s+([\d.]+)',                   'Pure-FTPd {}'),
+            (r'Microsoft FTP Service(?:\s+([\d.]+))?',  'Microsoft IIS FTP Service {}'),
+        ]:
+            m = re.search(pattern, body, re.IGNORECASE)
+            if m:
+                ver = (m.group(1) or "") if m.lastindex else ""
+                return "ftp", fmt.format(ver).strip()
+        return "ftp", body[:80]
+
+    # ── HTTP — parse Server header ───────────────────────────────────────────
+    if "HTTP/" in banner or re.search(r'\bServer:', banner, re.IGNORECASE):
         m = re.search(r'Server:\s*(.+?)(?:\r|\n|$)', banner, re.IGNORECASE)
         if m:
             server = m.group(1).strip()
             for pattern, fmt in [
-                (r'Apache/(\d[\d.]+)',           'Apache httpd {}'),
-                (r'nginx/(\d[\d.]+)',            'nginx {}'),
-                (r'Microsoft-IIS/(\d[\d.]+)',    'Microsoft IIS {}'),
-                (r'Apache Tomcat/(\d[\d.]+)',    'Apache Tomcat {}'),
+                (r'Apache/(\d[\d.]+)',        'Apache httpd {}'),
+                (r'nginx/(\d[\d.]+)',         'nginx {}'),
+                (r'Microsoft-IIS/(\d[\d.]+)', 'Microsoft IIS {}'),
+                (r'Apache Tomcat/(\d[\d.]+)', 'Apache Tomcat {}'),
             ]:
                 vm = re.search(pattern, server, re.IGNORECASE)
                 if vm:
                     return "http", fmt.format(vm.group(1))
-            return "http", server
+            return "http", server[:80]
         return "http", ""
 
-    # FTP  e.g. "220 (vsFTPd 2.3.4)" or "220 ProFTPD 1.3.6 Server"
-    if banner.startswith("220"):
-        body = banner[4:].strip()
-        for pattern, fmt in [
-            (r'vsftpd\s+([\d.]+)',                    'vsftpd {}'),
-            (r'ProFTPD\s+([\d.]+)',                   'ProFTPD {}'),
-            (r'Pure-FTPd\s+([\d.]+)',                 'Pure-FTPd {}'),
-            (r'Microsoft FTP Service(?:\s+([\d.]+))?','Microsoft IIS FTP Service {}'),
-        ]:
-            fm = re.search(pattern, body, re.IGNORECASE)
-            if fm:
-                ver = fm.group(1) if fm.lastindex and fm.group(1) else ""
-                return "ftp", fmt.format(ver).strip()
-        return "ftp", body
+    # ── MySQL / MariaDB — binary greeting contains a plaintext version ───────
+    if port == 3306:
+        m = re.search(r'(\d+\.\d+\.\d+(?:-MariaDB|-[\w.]+)?)', banner)
+        if m:
+            ver = m.group(1)
+            label = "MariaDB" if ("mariadb" in ver.lower() or "mariadb" in banner.lower()) else "MySQL"
+            return "database", f"{label} {ver}"
 
-    # Telnet — port 23 always flagged regardless of banner content
+    # ── Telnet ───────────────────────────────────────────────────────────────
     if port == 23:
         return "telnet", ""
 
-    # SMTP / mail servers  e.g. "220 mail.example.com ESMTP Postfix"
-    if re.match(r'^220\b', banner) and port in (25, 465, 587):
-        body = banner[4:].strip()
-        for pattern, fmt in [
-            (r'Postfix(?:\s+([\d.]+))?', 'Postfix {}'),
-            (r'Exim\s+([\d.]+)',         'Exim {}'),
-        ]:
-            fm = re.search(pattern, body, re.IGNORECASE)
-            if fm:
-                ver = fm.group(1) if fm.lastindex and fm.group(1) else ""
-                return "mail", fmt.format(ver).strip()
-        return "mail", body
+    # ── Fall back to port-number hint ────────────────────────────────────────
+    return (PORT_SERVICE_HINTS.get(port, "unknown") if port else "unknown"), ""
 
-    # Fall back to port hint
-    service = PORT_SERVICE_HINTS.get(port, "unknown") if port else "unknown"
-    return service, ""
 
+# ── Vulnerability lookup ─────────────────────────────────────────────────────
 
 def check_vulnerability(service, version, banner=None):
-    """Look up the vulnerability database and return a list of (cve, severity) tuples.
+    """Return a list of (cve, severity) tuples for the given service/version.
 
-    Entries with an empty version string in the database apply to every
-    instance of that service (e.g. telnet, SNMP default community).
-    Version-specific entries are matched first by exact string comparison,
-    then by a normalised substring search against the raw banner.
+    Matching strategy (in order):
+    1. Entries with an empty version string match all instances of the service.
+    2. Exact case-insensitive match between parsed version and DB entry.
+    3. Normalised substring search of the DB version string inside the raw banner.
     """
     if service not in vulnerable_services:
         return []
@@ -246,26 +338,23 @@ def check_vulnerability(service, version, banner=None):
 
     for entry in vulnerable_services[service]:
         entry_version = entry.get("version", "")
-        cve = entry["cve"]
+        cve      = entry["cve"]
         severity = entry["severity"]
 
         if cve in seen:
             continue
 
-        # Version-independent — applies to all instances of this service
-        if not entry_version:
+        if not entry_version:                          # version-independent
             results.append((cve, severity))
             seen.add(cve)
             continue
 
-        # Exact match against parsed version
         if version and entry_version.lower() == version.lower():
             results.append((cve, severity))
             seen.add(cve)
             continue
 
-        # Fuzzy match: check if the DB version string appears in the raw banner
-        if banner and entry_version:
+        if banner and entry_version:                   # fuzzy banner match
             norm_banner = re.sub(r'[_/]', ' ', banner.lower())
             norm_entry  = re.sub(r'[_/]', ' ', entry_version.lower())
             if norm_entry in norm_banner:
@@ -274,6 +363,8 @@ def check_vulnerability(service, version, banner=None):
 
     return results
 
+
+# ── Helpers ──────────────────────────────────────────────────────────────────
 
 def validate_target(target):
     try:
@@ -288,10 +379,9 @@ def validate_target(target):
 
 
 def parse_ports(ports_str):
-    """Parse a port specification into a deduplicated list of integers.
+    """Parse a port spec into a deduplicated list of ints.
 
-    Accepts a single port (``22``), a range (``1-1024``), or a
-    comma-separated mix (``22,80,443,8000-8080``).
+    Accepts: single port ``22``, range ``1-1024``, or mixed ``22,80,443,8000-8080``.
     """
     ports = []
     try:
@@ -310,28 +400,14 @@ def parse_ports(ports_str):
     except ValueError as e:
         print(f"Error: {e}")
         sys.exit(1)
-    # Deduplicate while preserving order
-    return list(dict.fromkeys(ports))
-
-
-def _fingerprint_port(target, port):
-    """Banner-grab and classify a single open TCP port.
-
-    Returns (port, service, version, vulns) so results can be collected
-    from multiple threads and sorted afterwards.
-    """
-    banner = get_banner(target, port)
-    service, version = parse_service_version(banner, port)
-    vulns = check_vulnerability(service, version, banner)
-    return port, service, version, vulns
+    return list(dict.fromkeys(ports))   # deduplicate, preserve order
 
 
 def print_port_results(port, protocol, service, version, vulns):
     """Print a single port's findings to the terminal."""
-    label = f"{protocol}/{port}"
-    svc   = service if service != "unknown" else "unknown service"
-    ver   = f" ({version})" if version else ""
-    print(f"\n  [{label}]  {svc}{ver}")
+    svc = service if service != "unknown" else "unknown service"
+    ver = f" ({version})" if version else ""
+    print(f"\n  [{protocol}/{port}]  {svc}{ver}")
     if vulns:
         for cve, severity in vulns:
             print(f"    {_color(cve, severity)}  |  Severity: {_color(severity, severity)}")
@@ -340,21 +416,15 @@ def print_port_results(port, protocol, service, version, vulns):
 
 
 def write_report(filepath, targets_data, ports, ports_str):
-    """Write a Markdown vulnerability report to *filepath*.
+    """Write a Markdown vulnerability report.
 
-    targets_data: list of dicts, one per target:
-      {
-        "target":   str,
+    targets_data: list of dicts — one per target:
+      { "target": str,
         "tcp_open": [(port, service, version, vulns), ...],
-        "udp_open": [(port, service, vulns), ...],
-      }
+        "udp_open": [(port, service, vulns), ...] }
     """
     udp_probed = sorted(p for p in ports if p in COMMON_UDP_SERVICES)
-
-    lines = []
-
-    # Header
-    lines += [
+    lines = [
         "# Network Vulnerability Scan Report",
         "",
         f"**Scan Date:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}  ",
@@ -370,11 +440,11 @@ def write_report(filepath, targets_data, ports, ports_str):
         tcp_open    = entry["tcp_open"]
         udp_open    = entry["udp_open"]
         tcp_closed  = len(ports) - len(tcp_open)
-        total_vulns = sum(len(v[3]) for v in tcp_open) + sum(len(v[2]) for v in udp_open)
+        total_vulns = sum(len(r[3]) for r in tcp_open) + sum(len(r[2]) for r in udp_open)
 
         lines += [f"## Target: {target}", ""]
 
-        # TCP section
+        # TCP
         lines += ["### TCP Ports", ""]
         if tcp_open:
             for port, service, version, vulns in sorted(tcp_open, key=lambda x: x[0]):
@@ -389,10 +459,9 @@ def write_report(filepath, targets_data, ports, ports_str):
                 lines.append("")
         else:
             lines += ["No open TCP ports found.", ""]
-
         lines += [f"*Closed TCP ports: {tcp_closed}*", ""]
 
-        # UDP section
+        # UDP
         lines += ["### UDP Ports", ""]
         if udp_open:
             for port, service, vulns in sorted(udp_open, key=lambda x: x[0]):
@@ -407,7 +476,7 @@ def write_report(filepath, targets_data, ports, ports_str):
         else:
             lines += ["No UDP service ports responded.", ""]
 
-        # Summary table
+        # Summary
         lines += [
             "### Summary",
             "",
@@ -424,6 +493,8 @@ def write_report(filepath, targets_data, ports, ports_str):
     with open(filepath, "w") as f:
         f.write("\n".join(lines) + "\n")
 
+
+# ── Entry point ──────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -450,27 +521,12 @@ if __name__ == "__main__":
 
     for target in targets:
         print(f"\nScanning target: {target}")
-        open_tcp_ports = scan_tcp_ports(target, ports)
-        open_udp_ports = scan_udp_ports(target, ports)
 
-        print(f"\nResults for {target}:")
+        tcp_open    = scan_tcp_ports(target, ports)
+        udp_results = scan_udp_ports(target, ports)
 
-        tcp_open = []
         udp_open = []
-
-        if open_tcp_ports:
-            with tqdm.tqdm(total=len(open_tcp_ports), desc="Fingerprinting TCP ports") as pbar:
-                with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
-                    futures = {
-                        executor.submit(_fingerprint_port, target, port): port
-                        for port in open_tcp_ports
-                    }
-                    for future in concurrent.futures.as_completed(futures):
-                        tcp_open.append(future.result())
-                        pbar.update(1)
-            tcp_open.sort(key=lambda x: x[0])
-
-        for port in open_udp_ports:
+        for port in udp_results:
             service = COMMON_UDP_SERVICES.get(port, "unknown")
             vulns   = check_vulnerability(service, "", None)
             udp_open.append((port, service, vulns))

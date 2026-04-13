@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(ls /home/casto/Git/Network_Analyzer/*.py)",
-      "Bash(python3 -c ':*)"
+      "Bash(python3 -c ':*)",
+      "Bash(venv/bin/python3 -c ':*)"
     ]
   }
 }
